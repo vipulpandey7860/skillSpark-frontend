@@ -10,11 +10,12 @@ const page = () => {
 
   return (
     <>
-    
-      <Link href="/student">Student</Link>
+    <div className='flex items-center gap-8 justify-center'>
+      <Link  className='bg-blue-400 p-5 rounded-md' href="/student">Student</Link>
       <br />
       <br />
-      <Link href="/employe">Employe</Link>
+      <Link className='bg-blue-400 p-5 rounded-md' href="/employe">Employe</Link>
+      </div>
     </>
 
     )

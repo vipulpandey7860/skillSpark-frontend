@@ -1,34 +1,64 @@
 "use client"
-import { asyncForgetPasswordStudent } from "@/store/Actions/studentAction"
-import { useRouter } from "next/navigation"
-import { useDispatch, useSelector } from "react-redux"
-const page = () => {
-    const dispatch = useDispatch();
-    const router = useRouter();
+import { asyncForgetPasswordStudent } from "@/store/Actions/studentAction";
+import { useRouter } from "next/navigation"; 
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react"; 
 
-   const {errors} =  useSelector((state) => state.studentReducer)
+const ForgetPasswordPage = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
 
-    const sendEmailHandler = async () => {
-        const email = {
-            email: "vipul2@gmail.com"
-        };
-        await dispatch(asyncForgetPasswordStudent(email));
+  const { errors} = useSelector((state) => state.studentReducer);
+  const [email, setEmail] = useState("");
 
-        if (errors.length ===1) {
-            router.push("/student/forget/otp")
-        }
-        else {
-            toast.error(JSON.stringify(errors));
-            return;
+  const sendEmailHandler = async () => {
+    const emailData = {
+      email: email,
+    };
 
-        }
+    await dispatch(asyncForgetPasswordStudent(emailData));
+
+    if (errors.length === 1) {
+      router.push("/student/forget/otp");
     }
+  };
 
-    return (
-        <>
-            <button onClick={sendEmailHandler} className="m-5 bg-green-700">send mail</button>
-        </>
-    )
-}
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+      <header className="mb-8 text-2xl font-semibold text-gray-700">
+        Enter email address to reset password
+      </header>
+      <div className="mb-4">
+        <label htmlFor="email" className="block text-lg font-medium text-gray-700">
+          Email Address
+        </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="mt-2 px-4 py-2 w-64 border rounded-md focus:ring-blue-500 focus:border-blue-500 text-gray-800"
+          placeholder="Enter your email"
+          required
+        />
+      </div>
+      {errors.length > 0 && (
+        <div className="text-red-600">
+          {errors.map((error, index) => (
+            <p key={index}>{error}</p>
+          ))}
 
-export default page
+        </div>
+      )}
+      <button
+        onClick={sendEmailHandler}
+        className="bg-green-700 text-white font-medium px-4 py-2 rounded-md hover:bg-green-600"
+      >
+        Send Email
+      </button>
+    </div>
+  );
+};
+
+export default ForgetPasswordPage;

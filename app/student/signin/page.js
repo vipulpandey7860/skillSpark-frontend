@@ -1,16 +1,16 @@
 "use client"
-
-import { asyncSigninStudent } from "@/store/Actions/studentAction";
+import Signin from "@/components/student ui/Signin";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux"
+import {  useSelector } from "react-redux";
+import 'react-toastify/dist/ReactToastify.css';
+
+
 export const metadata = {
-  title: 'Student | Signup',
+  title: 'Student | Signin',
 }
 const page = () => {
-  const dispatch = useDispatch();
-
   const router = useRouter();
   const { isAuthenticated } = useSelector(state => state.studentReducer)
 
@@ -19,24 +19,16 @@ const page = () => {
     if (isAuthenticated) {
       router.push('/student/auth')
     }
+   
   }, [isAuthenticated])
 
 
-  const signinHandler = () => {
-    const student = {
-      email: "vipul@gmail.com",
-      password: "Vipul@7860"
-    };
-    dispatch(asyncSigninStudent(student))
-
-  }
   
   return (
     <>
+      
+      <Signin />
 
-      <button className="bg-red-900 mx-5" onClick={signinHandler}>signin</button>
-
-      <Link href="/student/forget" className="bg-red-900 mx-5" >forgot password</Link>
       
     </>
   )

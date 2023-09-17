@@ -1,5 +1,7 @@
 "use client"
 
+import Footer from "@/components/student ui/Footer"
+import Navbar from "@/components/student ui/Navbar"
 import { asyncCurrentStudent,asyncSignoutStudent } from "@/store/Actions/studentAction"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
@@ -22,42 +24,15 @@ const StudentLayout = ({ children }) => {
     }
   }, [isAuthenticated])
 
-  const signoutHandler = () => {
-    dispatch(asyncSignoutStudent());
-  }
+ 
 
   return (
     <>
-      <nav className="bg-gray-800">
+      
+      <Navbar/>
 
-      <Link className="mx-5 bg-green-700" href={isAuthenticated ? "/student/auth":"/student"}>Home</Link>
-
-        {isAuthenticated ? (
-
-          <>
-            <Link className="mx-5 bg-green-700" href="/student/auth/profile">Profile</Link>
-            
-            <Link className="mx-5 bg-green-700" href="/student/auth/resume">resume</Link>
-
-            <Link className="mx-5 bg-green-700" href='/student/auth/applied'>applied to</Link>
-
-            <Link onClick={signoutHandler} className="mx-5 bg-green-700" href="">Logout</Link>
-          
-          </>) :
-          
-          (<>
-            
-            <Link className="mx-5 bg-green-700" href="/student/signin">Signin</Link>
-        <Link className="mx-5 bg-green-700" href="/student/signup">Signup</Link>
-   
-          
-          </>)
-        }
-       
-        
-
-      </nav>
       {children}
+      <Footer/>
     </>
   )
 }

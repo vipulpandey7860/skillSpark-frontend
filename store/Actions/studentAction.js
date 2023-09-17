@@ -187,3 +187,38 @@ export const asyncEditEducation = (id,edu) => async (dispatch, getState) => {
         dispatch(iserror(error.response.data.message))
     }
 }
+
+
+// ///////////////////////////////job //////////////////////////////////////
+
+
+export const asyncAddJob = (job) => async (dispatch, getState) => {
+
+    try {
+        const { data } = await axios.post("resume/add-job/",job);
+        dispatch(asyncCurrentStudent());
+    } catch (error) {
+        dispatch(iserror(error.response.data.message))
+    }
+}
+
+export const asyncDeleteJob = (id) => async (dispatch, getState) => {
+
+    try {
+        const { data } = await axios.post("resume/delete-job/"+id);
+        dispatch(asyncCurrentStudent());
+    } catch (error) {
+        dispatch(iserror(error.response.data.message))
+    }
+}
+
+
+export const asyncEditJob = (id,job) => async (dispatch, getState) => {
+
+    try {
+        const { data } = await axios.post("resume/edit-job/"+id,job);
+        dispatch(asyncCurrentStudent());
+    } catch (error) {
+        dispatch(iserror(error.response.data.message))
+    }
+}

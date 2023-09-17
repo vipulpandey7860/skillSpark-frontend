@@ -1,45 +1,64 @@
 "use client"
 
-import { asyncDeleteEducation } from "@/store/Actions/studentAction"
-import Link from "next/link"
-import { useDispatch, useSelector } from "react-redux"
+import ResumeEducation from "./ResumeEducation";
+import ResumeJobs from "./ResumeJob";
+import ResumeProfile from "./ResumeProfile";
 const page = () => {
-    const dispatch = useDispatch();
-    const { student } = useSelector(state => state.studentReducer)
-    
-    const edudeleteHandler = (id) => {
-        
-        dispatch(asyncDeleteEducation(id))
-    }
+    return (
+        <>
 
-  return (
-      <>
-      
-      <h1>This is resume section </h1>
-      
-          <h4>Education <Link className="bg-blue-600" href='/student/auth/resume/education'>add education</Link> </h4>
-          <ul>
-              {student && student.resume.education.map((edu, index) => (
-                  <div className="bg-yellow-300 m-5" key={edu.id}>
-                      
-                      {JSON.stringify(edu)}
+            <h1 className="text-center text-4xl font-bold py-5"> Resume </h1>
 
-                      <br />
+            <div class="container px-24 py-5 shadow-md">
 
-                      <Link className="bg-blue-600" href={`/student/auth/resume/education/edit/${edu.id}`}>Edit education</Link>
+                <ResumeProfile />
+                <ResumeEducation />
+                <ResumeJobs />
+            </div>
 
-                      <br />
-                      <button onClick={()=>edudeleteHandler(edu.id)}
-                      
-                          className="bg-blue-600">
-                          delete education
-                      </button>
-                  </div>
-                ))}
-          </ul>
-      
-      </>
-  )
+            {/* <div class="container mx-auto px-4 sm:px-6 lg:px-8"> */}
+
+                {/* <section class="section_right ml-0 sm:ml-4 p-4">
+
+                    <h1 class="text-2xl font-semibold mt-4">PROFESSIONAL SKILLS</h1>
+                    <table class="w-full mt-4">
+                        <tr>
+                            <td class="w-1/5 font-semibold">HTML</td>
+                            <td>
+                                <div class="bg-gray-300 h-2 rounded-full">
+                                    <div class="bg-blue-500 h-2 rounded-full" style={{ width: "90%" }}></div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="w-1/5 font-semibold">HTML</td>
+                            <td>
+                                <div class="bg-gray-300 h-2 rounded-full">
+                                    <div class="bg-blue-500 h-2 rounded-full" style={{ width: "90%" }}></div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="w-1/5 font-semibold">HTML</td>
+                            <td>
+                                <div class="bg-gray-300 h-2 rounded-full">
+                                    <div class="bg-blue-500 h-2 rounded-full" style={{ width: "90%" }}></div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="w-1/5 font-semibold">HTML</td>
+                            <td>
+                                <div class="bg-gray-300 h-2 rounded-full">
+                                    <div class="bg-blue-500 h-2 rounded-full" style={{ width: "90%" }}></div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </section> */}
+            {/* </div> */}
+        </>
+    )
 }
 
 export default page

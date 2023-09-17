@@ -1,59 +1,270 @@
 "use client"
-import { asyncAvatarStudent, asyncResetPasswordStudent, asyncUpdateStudent } from "@/store/Actions/studentAction";
+import {
+  asyncAvatarStudent,
+  asyncResetPasswordStudent,
+  asyncUpdateStudent,
+} from "@/store/Actions/studentAction";
 import { useDispatch, useSelector } from "react-redux";
-const page = () => {
-    const dispatch = useDispatch();
-    const { student } = useSelector(state => state.studentReducer)
-    const studentUpdateHandler = () => {
-        const student = {
-            firstname: "pandey",
-            lastname: "vipul",
-        };
-        dispatch(asyncUpdateStudent(student))
+import { useState } from "react";
 
+const ProfilePage = () => {
+  const dispatch = useDispatch();
+  const { student } = useSelector((state) => state.studentReducer);
+  const [isEditing, setIsEditing] = useState(false);
+  const [avatarHovered, setAvatarHovered] = useState(false);
+  const [formData, setFormData] = useState({
+    email: student ? student.email : "",
+    firstname: student ? student.firstname : "",
+    lastname: student ? student.lastname : "",
+    address: student ? student.address : "",
+    city: student ? student.city : "",
+    aboutMe: student ? student.aboutMe : "",
+    contact: student ? student.contact : "",
+  });
+
+  const studentUpdateHandler = () => {
+    setIsEditing(!isEditing);
+  };
+
+  const handleAvatarClick = () => {
+    if (isEditing) {
+      document.getElementById("avatarInput").click();
     }
+  };
 
-    const avatarHandler = (e) => {
-      e.preventDefault();
-        const formdata = new FormData();
-        formdata.set("avatar", e.target.avatar.files[0]);
+  const handleAvatarHover = () => {
+    setAvatarHovered(true);
+  };
 
-        dispatch(asyncAvatarStudent(formdata))
+  const handleAvatarLeave = () => {
+    setAvatarHovered(false);
+  };
 
-    }
+  const avatarHandler = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.set("avatar", e.target.files[0]);
+    dispatch(asyncAvatarStudent(formData));
+  };
 
-    const resetPasswordHandler = (e) => {
-        e.preventDefault();
+  const resetPasswordHandler = (e) => {
+    e.preventDefault();
+    const newPassword = {
+      password: "Vipul@1234",
+    };
+    dispatch(asyncResetPasswordStudent(newPassword));
+  };
 
-        const pwd = {
-            password: "Vipul@1234",
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
 
-        }
-        dispatch(asyncResetPasswordStudent(pwd))
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(asyncUpdateStudent(formData));
+    setIsEditing(false); // Hide the form after submission
+  };
 
-    return (
-        <>
-            <img height={200} src={student && student?.avatar.url} alt="" />
+  return (
+    <div className="py-8">
+      <div
+        className="bg-cover bg-center h-64"
+        style={{
+          backgroundImage: `url(${student && student.avatar.fileId && student.avatar.url})`,
+        }}
+      >
+        <div className="container mx-auto">
+          <div className="w-full lg:w-7/12 pt-5 text-center">
+            <h1 className="text-4xl text-white font-bold mix-blend-difference">
+              Hello, {student && student.firstname} {student && student.lastname}
+            </h1>
+            <p className="mt-3 mb-6 text-lg text-white mix-blend-difference">
+              This is your profile page. You can see the details and change them accordingly.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="flex">
+        <div className="container border w-1/4 h-max mx-auto mt-5 p-5 rounded-lg shadow-md">
+          <div className="w-full mx-auto">
+            <div className="card card-profile ">
+              <div className="flex justify-center">
+                <div className="w-32 h-32  relative">
+                  <div
+                    className={`card-profile-image cursor-pointer ${
+                      isEditing && avatarHovered ? 'hover:opacity-80' : ''
+                    }`}
+                    onClick={handleAvatarClick}
+                    onMouseEnter={handleAvatarHover}
+                    onMouseLeave={handleAvatarLeave}
+                  >
+                    <img
+                      src={student?.avatar.fileId && student?.avatar.url}
+                      className="rounded-full"
+                      alt="Profile Image"
+                    />
+                    {isEditing && avatarHovered && (
+                      <div className="mt-2">
+                        <input
+                          type="file"
+                          id="avatarInput"
+                          className="hidden"
+                          onChange={avatarHandler}
+                        />
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+              <div className="card-body pt-0 pt-md-4">
+                <div className="text-center">
+                  <h3 className="text-2xl capitalize pt-4 font-semibold">
+                    {student?.firstname} {student?.lastname}
+                  </h3>
+                  <div className="text-lg mt-2">
+                    <i className="ni location_pin capitalize ">{student?.city}</i>
+                  </div>
+                </div>
+              </div>
+              <div className="card-header text-center pt-8 pt-md-4 pb-0 pb-md-4">
+                <div className="flex gap-4 justify-end">
+                  <button
+                    onClick={studentUpdateHandler}
+                    className="bg-yellow-400 p-2 px-3 text-white font-semibold rounded-md"
+                  >
+                    Edit profile
+                  </button>
+                  <button
+                    onClick={resetPasswordHandler}
+                    className="bg-yellow-400 p-2 px-3 text-white font-semibold rounded-md"
+                  >
+                    Change Password
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="border rounded-lg mt-5 w-1/2 order-first xl:col-span-8 mx-10">
+          <div className="bg-secondary shadow card">
+            <div className="bg-white border-0 card-header">
+              <div className="flex items-center justify-between p-5 ">
+                <h3 className="mb-0 text-xl font-semibold">My Account</h3>
+              </div>
+            </div>
+            <div className="card-body px-5 text-[#314362]">
+              <form onSubmit={handleSubmit}>
+                <h6 className=" text-gray-600 text-sm ">User Information</h6>
+                <div className="grid grid-cols-2 gap-4 px-4 py-10 border-b">
+                  <div className="form-group flex flex-col  gap-2">
+                    <label htmlFor="input-firstname" className="form-control-label ">First name</label>
+                    <input
+                      type="text"
+                      id="input-firstname"
+                      className={`form-input ${isEditing ? 'border' : 'bg-white'} p-2 border rounded-md shadow-md`}
+                      placeholder="First Name"
+                      name="firstname"
+                      value={formData.firstname}
+                      onChange={handleInputChange}
+                      readOnly={!isEditing}
+                    />
+                  </div>
+                  <div className="form-group flex flex-col gap-2">
+                    <label htmlFor="input-lastname" className="form-control-label ">Last name</label>
+                    <input
+                      type="text"
+                      id="input-lastname"
+                      className={`form-input ${isEditing ? 'border' : 'bg-white'} p-2 border rounded-md shadow-md`}
+                      placeholder="Last Name"
+                      name="lastname"
+                      value={formData.lastname}
+                      onChange={handleInputChange}
+                      readOnly={!isEditing}
+                    />
+                  </div>
+                  <div className="form-group flex flex-col gap-2">
+                    <label htmlFor="input-email" className="form-control-label ">Email address</label>
+                    <input
+                      type="email"
+                      id="input-email"
+                      className={`form-input ${isEditing ? 'border' : 'bg-white'} p-2 border rounded-md shadow-md`}
+                      placeholder="jesse@example.com"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      readOnly={!isEditing}
+                    />
+                  </div>
+                </div>
+                <h6 className="mb-4 text-gray-600 text-sm pt-5">Contact Information</h6>
+                <div className="grid grid-cols-2 gap-4 px-4 py-10 border-b ">
 
-            <form onSubmit={avatarHandler} encType=" multipart/form-data ">
+                  <div className="form-group flex flex-col gap-2">
+                    <label htmlFor="input-address" className="form-control-label ">Address</label>
+                    <input
+                      id="input-address"
+                      className={`form-input ${isEditing ? 'border' : 'bg-white'} p-2 border rounded-md shadow-md`}
+                      placeholder="Home Address"
+                      name="address"
+                      value={formData.address}
+                      onChange={handleInputChange}
+                      readOnly={!isEditing}
+                    />
+                  </div>
+                  <div className="form-group flex flex-col gap-2">
+                    <label htmlFor="input-city" className="form-control-label ">City</label>
+                    <input
+                      type="text"
+                      id="input-city"
+                      className={`form-input ${isEditing ? 'border' : 'bg-white'} p-2 border rounded-md shadow-md`}
+                      placeholder="City"
+                      name="city"
+                      value={formData.city}
+                      onChange={handleInputChange}
+                      readOnly={!isEditing}
+                    />
+                  </div>
+                  <div className="form-group flex flex-col gap-2">
+                    <label htmlFor="input-contact" className="form-control-label ">Contact</label>
+                    <input
+                      type="text"
+                      id="input-contact"
+                      className={`form-input ${isEditing ? 'border' : 'bg-white'} p-2 border rounded-md shadow-md`}
+                      placeholder="Contact"
+                      name="contact"
+                      value={formData.contact}
+                      onChange={handleInputChange}
+                      readOnly={!isEditing}
+                    />
+                  </div>
+                </div>
+                <h6 className="mb-4 text-gray-600 text-sm mt-5">About Me</h6>
+                <div className="form-group flex flex-col gap-2 p-5">
+                  <label className="">About Me</label>
+                  <textarea
+                    rows="4"
+                    className={`form-input ${isEditing ? 'border' : 'bg-white'} p-2 border rounded-md shadow-md`}
+                    placeholder="A few words about you ..."
+                    name="aboutMe"
+                    value={formData.aboutMe}
+                    onChange={handleInputChange}
+                    readOnly={!isEditing}
+                  />
+                </div>
+                {isEditing && (
+                  <button type="submit" className="p-2 bg-green-400 rounded-md mb-5 mx-5 text-white">Save Changes</button>
+                )}
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-
-
-                <input type="file" name="avatar" />
-                <button type="submit">Upload</button>
-
-            </form>
-
-
-            <button onClick={studentUpdateHandler} className="bg-red-900 mx-5">Update student</button>
-
-            
-            <button onClick={resetPasswordHandler} className="bg-red-900 mx-5">reset password</button>
-
-
-        </>
-    )
-}
-
-export default page
+export default ProfilePage;
