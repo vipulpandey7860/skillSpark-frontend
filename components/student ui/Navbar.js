@@ -209,9 +209,6 @@ const Navbar = () => {
 
         </div>
       </div>
-      {/* {isLoginModalVisible && (
-        <Signin toggleLoginModal={toggleLoginModal} />
-      )} */}
     </header>
   );
 };

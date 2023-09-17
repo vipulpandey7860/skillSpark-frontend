@@ -5,11 +5,12 @@ import {
   asyncUpdateStudent,
 } from "@/store/Actions/studentAction";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 const ProfilePage = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
-  const { student } = useSelector((state) => state.studentReducer);
+  const { student,isAuthenticated } = useSelector((state) => state.studentReducer);
   const [isEditing, setIsEditing] = useState(false);
   const [avatarHovered, setAvatarHovered] = useState(false);
   const [formData, setFormData] = useState({
@@ -21,6 +22,15 @@ const ProfilePage = () => {
     aboutMe: student ? student.aboutMe : "",
     contact: student ? student.contact : "",
   });
+
+
+  useEffect(() => {
+
+    if (!isAuthenticated) {
+      router.push('/student/auth')
+    }
+  }, [isAuthenticated])
+
 
   const studentUpdateHandler = () => {
     setIsEditing(!isEditing);
@@ -74,7 +84,7 @@ const ProfilePage = () => {
       <div
         className="bg-cover bg-center h-64"
         style={{
-          backgroundImage: `url(${student && student.avatar.fileId && student.avatar.url})`,
+          backgroundImage: `url(${ student?.avatar.fileId || student?.avatar.url})`,
         }}
       >
         <div className="container mx-auto">
@@ -103,7 +113,7 @@ const ProfilePage = () => {
                     onMouseLeave={handleAvatarLeave}
                   >
                     <img
-                      src={student?.avatar.fileId && student?.avatar.url}
+                      src={student?.avatar.fileId || student?.avatar.url}
                       className="rounded-full"
                       alt="Profile Image"
                     />

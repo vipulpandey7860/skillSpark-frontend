@@ -17,7 +17,7 @@ export const asyncCurrentStudent = () => async (dispatch, getState) => {
         dispatch(addstudent(data.student));
     }
     catch (error) {
-        dispatch(iserror(error.response.data.message))
+        dispatch(iserror(error.response?.data.message))
     }
 }
 

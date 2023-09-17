@@ -43,7 +43,7 @@ const Signup = () => {
   return (
     <div className="flex p-10 gap-5">
       <div
-        className="w-70 bg-cover bg-center relative p-5"
+        className="w-70 bg-cover bg-center  p-5"
         style={{
           backgroundImage:
             'url("https://internshala.com/static/images/registration/student/background-768.png")',

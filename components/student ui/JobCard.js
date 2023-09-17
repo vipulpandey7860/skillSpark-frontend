@@ -2,7 +2,7 @@ import React from 'react';
 import { MdLocationOn, MdAttachMoney } from 'react-icons/md'; 
               import {CiCircleInfo}  from 'react-icons/ci';                 
 
-const JobCard = ({ job, student, onApply }) => {
+const JobCard = ({ job, student, ApplyJobHandler }) => {
   return (
     <div className="rounded-lg shadow-md overflow-hidden bg-white p-4">
       <div className='flex items-center justify-between'>
@@ -32,7 +32,7 @@ const JobCard = ({ job, student, onApply }) => {
         {!job.students.includes(student && student._id) ? (
           <button
             className="bg-blue-900 text-white py-2 px-4 rounded-md w-full"
-            onClick={() => onApply(job._id)}
+            onClick={() => ApplyJobHandler(job._id)}
           >
             Apply Job
           </button>
