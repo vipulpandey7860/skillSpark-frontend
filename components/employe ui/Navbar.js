@@ -3,7 +3,7 @@ import { FaCaretDown } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { asyncSignoutemploye } from '@/store/Actions/employeAction';
+import { asyncDeleteEmploye, asyncSignoutemploye } from '@/store/Actions/employeAction';
 const Navbar = () => {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -20,6 +20,13 @@ const Navbar = () => {
   const toggleProfileDropdown = () => {
     setProfileDropdownVisible(!profileDropdownVisible);
   };
+
+  const accountDeleteHandler = () => {
+    if (confirm('Are you sure you want to delete your account?')) {
+      dispatch(asyncDeleteEmploye());
+
+    }
+  };  
 
   return (
     <header className="bg-white shadow-md text-[#676566] font-semibold ">
@@ -61,6 +68,12 @@ const Navbar = () => {
                           className="hover:text-blue-500 text-left"
                         >
                           Logout
+                    </button>
+                    <button
+                          onClick={accountDeleteHandler}
+                          className="hover:text-blue-500 text-left"
+                        >
+                          Delete account
                         </button>
                   </div>
                 )}

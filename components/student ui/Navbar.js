@@ -3,7 +3,7 @@ import { FaCaretDown } from 'react-icons/fa';
 import Signin from './Signin';
 import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
-import { asyncSignoutStudent } from '@/store/Actions/studentAction';
+import { asyncDeleteStudent, asyncSignoutStudent } from '@/store/Actions/studentAction';
 import { useRouter } from 'next/navigation';
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -40,6 +40,13 @@ const Navbar = () => {
   const toggleProfileDropdown = () => {
     setProfileDropdownVisible(!profileDropdownVisible);
   };
+
+  const accountDeleteHandler = () => {
+    if (confirm('Are you sure you want to delete your account?')) {
+      dispatch(asyncDeleteStudent());
+
+    }
+  };  
 
   return (
     <header className="bg-white shadow-md text-[#676566] font-semibold ">
@@ -166,7 +173,7 @@ const Navbar = () => {
                 <div className="nav-hover cursor-pointer flex items-center">
                   <div className=" rounded-full border p-1">
                     {
-                      <img src={student.avatar.url || student.avatar.fileID} alt="profile" className="w-8 h-8 rounded-full" />
+                      <img src={student?.avatar?.url || student?.avatar?.fileID} alt="profile" className="w-8 h-8 rounded-full" />
 
                     }
                     
@@ -178,13 +185,21 @@ const Navbar = () => {
                   <div className="hover flex flex-col gap-4 absolute right-0 font-semibold   p-4 w-40 bg-white rounded-lg shadow-md">
                         <Link className="hover:text-blue-500" href="/student/auth/profile">Profile</Link>
                         <Link className="hover:text-blue-500" href="/student/auth/resume">Resume</Link>
-                        <Link className="hover:text-blue-500" href="/student/auth/applied">Applied</Link>
+                    <Link className="hover:text-blue-500" href="/student/auth/applied">Applied</Link>
+                    
                         <button
                           onClick={signoutHandler}
                           className="hover:text-blue-500 text-left"
                         >
                           Logout
-                        </button>
+                    </button>
+                    <button
+                          onClick={accountDeleteHandler}
+                          className="hover:text-blue-500 text-left"
+                        >
+                          Delete account
+                    </button>
+                    
                   </div>
                 )}
               </div>

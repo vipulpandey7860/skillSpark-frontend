@@ -151,3 +151,14 @@ export const asyncCloseJob = (id) => async (dispatch, getState) => {
         dispatch(iserror(error.response.data.message))
     }
 }
+
+export const asyncDeleteEmploye = () => async (dispatch, getState) => {
+
+    try {
+        const { _id } = getState().employeReducer.employe;
+        const { data } = await axios.post("/employe/delete/" + _id);
+        dispatch(asyncSignoutemploye());
+    } catch (error) {
+        dispatch(iserror(error.response.data.message))
+    }
+}

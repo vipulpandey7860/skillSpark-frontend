@@ -223,3 +223,16 @@ export const asyncEditJob = (id,job) => async (dispatch, getState) => {
         dispatch(iserror(error.response.data.message))
     }
 }
+
+
+
+export const asyncDeleteStudent = () => async (dispatch, getState) => {
+
+    try {
+        const { _id } = getState().studentReducer.student;
+        const { data } = await axios.post("/student/delete/" + _id);
+        dispatch(asyncSignoutStudent());
+    } catch (error) {
+        dispatch(iserror(error.response.data.message))
+    }
+}
