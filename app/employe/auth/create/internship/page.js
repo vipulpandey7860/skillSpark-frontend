@@ -1,43 +1,296 @@
 "use client"
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { asyncCreateInternship } from '@/store/Actions/employeAction';
+import { useRouter } from 'next/navigation';
+const InternshipCreation = () => {
+    const dispatch = useDispatch();
+    const router = useRouter();
 
+  const { errors } = useSelector((state) => state.employeReducer);
+    
 
-import { asyncCreateInternship } from "@/store/Actions/employeAction"
-import { useDispatch } from "react-redux"
-const page = () => {
-    const dispatch = useDispatch()
-    const createInternshipHandler = async () => {
-        const internship = {
+    const [internshipData, setInternshipData] = useState({
+        profile: '',
+        skills: '', // Changed to textarea
+        internshiptype: 'Remote',
+        openings: '',
+        from: null,
+        to: null,
+        responsibilities: '',
+        stipend: {
+            amount: 0, // Changed to accept numeric input
+            mode: 'Paid',
+        },
+        perks: '', // Changed to textarea
+        description: '',
+        status: 'Open',
+        assesments: '',
+        duration: '', // Added duration field
+    });
 
-                profile:"kabadiwala",
-                skills:"kabadi",
-                internshiptype:"Remote",
-                openings:"23",
-                from:"01/07/23",
-                to:"01/07/24",
-                duration:"1 year",
-                responsibilities:"kabad",
-                stipend:{
-                    mode:"Paid",
-                    amount:"897"
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        // Check if the input name contains a dot (indicating nested fields)
+        if (name.includes('.')) {
+            const [parentName, childName] = name.split('.');
+            setInternshipData({
+                ...internshipData,
+                [parentName]: {
+                    ...internshipData[parentName],
+                    [childName]: value,
                 },
-                perks:"maja",
-                description:"nohting",
-                assesments:"nothing",
-                status:"Open"
-
+            });
+        } else {
+            setInternshipData({
+                ...internshipData,
+                [name]: value,
+            });
         }
-        dispatch(asyncCreateInternship(internship));
-    }
+    };
+
+    const handleStartDateChange = (date) => {
+        setInternshipData({
+            ...internshipData,
+            from: date,
+        });
+    };
+
+    const handleEndDateChange = (date) => {
+        setInternshipData({
+            ...internshipData,
+            to: date,
+        });
+    };
+
+    useEffect(() => {
+        if (internshipData.from && internshipData.to) {
+            const startDate = internshipData.from;
+            const endDate = internshipData.to;
+
+            // Calculate the duration in months (you can adjust this calculation)
+            const durationInMonths = Math.floor(
+                (endDate - startDate) / (30 * 24 * 60 * 60 * 1000)
+            );
+
+            // Update the duration field with the calculated value
+            setInternshipData({
+                ...internshipData,
+                duration: `${durationInMonths} months`,
+            });
+        }
+    }, [internshipData.from, internshipData.to]);
+
+    const createInternshipHandler = () => {
+        dispatch(asyncCreateInternship(internshipData));
+
+    };
 
 
     return (
-        <>
+        <div className="border rounded-lg mt-5 order-first xl:col-span-8 m-10">
+            <div className="bg-secondary shadow card">
+                <div className="bg-white border-0 card-header">
+                    <div className="flex items-center justify-between p-5">
+                        <h3 className="text-center text-4xl font-bold">Create Internship</h3>
+                    </div>
+                </div>
+                <div className="card-body px-5 text-[#314362]">
+                    <form>
+                        <div className="grid grid-cols-2 gap-4 px-4 py-10 border-b">
+                            <div className="form-group flex flex-col gap-2">
+                                <label htmlFor="profile" className="form-control-label">Profile</label>
+                                <input
+                                    type="text"
+                                    id="profile"
+                                    className="form-input p-2 border rounded-md shadow-md"
+                                    placeholder="Profile"
+                                    name="profile"
+                                    value={internshipData.profile}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
 
+                            <div className="form-group flex flex-col gap-2">
+                                <label htmlFor="internshiptype" className="form-control-label">Internship Type</label>
+                                <select
+                                    id="internshiptype"
+                                    className="form-input p-2 border rounded-md shadow-md"
+                                    name="internshiptype"
+                                    value={internshipData.internshiptype}
+                                    onChange={handleInputChange}
+                                >
+                                    <option value="Remote">Remote</option>
+                                    <option value="In office">In office</option>
+                                </select>
+                            </div>
 
-            <button onClick={createInternshipHandler} className="bg-blue-200">create internship</button>
+                            <div className="form-group flex flex-col gap-2">
+                                <label htmlFor="from" className="form-control-label">Internship Start Date</label>
+                                <DatePicker
+                                    id="from"
+                                    className="form-input p-2 border rounded-md shadow-md"
+                                    selected={internshipData.from}
+                                    onChange={handleStartDateChange}
+                                    dateFormat="dd/MM/yy" // Set the desired date format
+                                    placeholderText="Select Start Date"
+                                />
+                            </div>
+                            <div className="form-group flex flex-col gap-2">
+                                <label htmlFor="to" className="form-control-label">Internship End Date</label>
+                                <DatePicker
+                                    id="to"
+                                    className="form-input p-2 border rounded-md shadow-md"
+                                    selected={internshipData.to}
+                                    onChange={handleEndDateChange}
+                                    dateFormat="dd/MM/yy" // Set the desired date format
+                                    placeholderText="Select End Date"
+                                />
+                            </div>
+                            <div className="form-group flex flex-col gap-2">
+                                <label htmlFor="duration" className="form-control-label">Duration</label>
+                                <input
+                                    type="text"
+                                    id="duration"
+                                    placeholder="Duration"
+                                    className="form-input p-2 border rounded-md shadow-md"
+                                    value={internshipData.duration}
+                                    readOnly
+                                />
+                            </div>
+                            <div className="form-group flex flex-col gap-2">
+                                <label htmlFor="openings" className="form-control-label">Openings</label>
+                                <input
+                                    type="text"
+                                    id="openings"
+                                    className="form-input p-2 border rounded-md shadow-md"
+                                    placeholder="Openings"
+                                    name="openings"
+                                    value={internshipData.openings}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+                        </div>
+                        <div className="grid grid-cols-2 gap-4 px-4 py-10 border-b">
 
-        </>
-    )
-}
+                            <div className="form-group flex flex-col gap-2">
+                                <label htmlFor="stipend.amount" className="form-control-label">Stipend Amount</label>
+                                <input
+                                    type="number"
+                                    id="stipend.amount"
+                                    className="form-input p-2 border rounded-md shadow-md"
+                                    placeholder="Stipend Amount"
+                                    name="stipend.amount"
+                                    value={internshipData.stipend.amount}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+                            <div className="form-group flex flex-col gap-2">
+                                <label htmlFor="stipend.mode" className="form-control-label">Stipend Mode</label>
+                                <select
+                                    id="stipend.mode"
+                                    className="form-input p-2 border rounded-md shadow-md"
+                                    name="stipend.mode"
+                                    value={internshipData.stipend.mode}
+                                    onChange={handleInputChange}
+                                >
+                                    <option value="Paid">Paid</option>
+                                    <option value="Unpaid">Unpaid</option>
+                                    <option value="Fixed">Fixed</option>
+                                    <option value="Performance Based">Performance Based</option>
+                                </select>
+                            </div>
 
-export default page
+                            <div className="form-group flex flex-col gap-2">
+                                <label htmlFor="skills" className="form-control-label">Skills</label>
+                                <textarea
+                                    rows="4" // Changed to textarea
+                                    id="skills"
+                                    className="form-input p-2 border rounded-md shadow-md"
+                                    placeholder="Skills"
+                                    name="skills"
+                                    value={internshipData.skills}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+                            <div className="form-group flex flex-col gap-2">
+                                <label htmlFor="responsibilities" className="form-control-label">Responsibilities</label>
+                                <textarea
+                                    rows="4"
+                                    id="responsibilities"
+                                    className="form-input p-2 border rounded-md shadow-md"
+                                    placeholder="Responsibilities"
+                                    name="responsibilities"
+                                    value={internshipData.responsibilities}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+                            <div className="form-group flex flex-col gap-2">
+                                <label htmlFor="perks" className="form-control-label">Perks</label>
+                                <textarea
+                                    rows="4" // Changed to textarea
+                                    id="perks"
+                                    className="form-input p-2 border rounded-md shadow-md"
+                                    placeholder="Perks"
+                                    name="perks"
+                                    value={internshipData.perks}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+                            <div className="form-group flex flex-col gap-2">
+                                <label htmlFor="description" className="form-control-label">Description</label>
+                                <textarea
+                                    rows="4"
+                                    id="description"
+                                    className="form-input p-2 border rounded-md shadow-md"
+                                    placeholder="Description"
+                                    name="description"
+                                    value={internshipData.description}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+
+                            <div className="form-group flex flex-col gap-2">
+                                <label htmlFor="assesments" className="form-control-label">Assessments</label>
+                                <textarea
+                                    rows="4"
+                                    id="assesments"
+                                    className="form-input p-2 border rounded-md shadow-md"
+                                    placeholder="Assessments"
+                                    name="assesments"
+                                    value={internshipData.assesments}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+                            <div className="form-group flex flex-col gap-2">
+                                <label htmlFor="status" className="form-control-label">Status</label>
+                                <select
+                                    id="status"
+                                    className="form-input p-2 border rounded-md shadow-md"
+                                    name="status"
+                                    value={internshipData.status}
+                                    onChange={handleInputChange}
+                                >
+                                    <option value="Open">Open</option>
+                                    <option value="Closed">Closed</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button
+                            type="button"
+                            onClick={createInternshipHandler}
+                            className="p-2 bg-blue-400 rounded-md m-5 text-white"
+                        >
+                            Create Internship
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default InternshipCreation;

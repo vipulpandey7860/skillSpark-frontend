@@ -1,16 +1,19 @@
 "use client"
 
-import { asyncCurrentemploye,asyncSignoutemploye } from "@/store/Actions/employeAction"
-import Link from "next/link"
+import Footer from "@/components/employe ui/Footer"
+import Navbar from "@/components/employe ui/Navbar"
+import { asyncCurrentemploye } from "@/store/Actions/employeAction"
+import { removeerror } from "@/store/Reducers/employeReducer"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-
+import { toast } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 
 const employeLayout = ({ children }) => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const { isAuthenticated } = useSelector(state => state.employeReducer)
+  const { isAuthenticated ,errors} = useSelector(state => state.employeReducer)
   
 
   useEffect(() => {
@@ -22,40 +25,24 @@ const employeLayout = ({ children }) => {
     }
   }, [isAuthenticated])
 
-  const signoutHandler = () => {
-    dispatch(asyncSignoutemploye());
-  }
+  if (errors) {
+    errors.map((error) => {
+      if (error.includes("Login first to access this resource")) {
+        dispatch(removeerror())
+        return;
+      }
+      toast.error(error);
+      dispatch(removeerror())
 
+    })
+
+  }
+  
   return (
     <>
-      <nav className="bg-gray-800">
-
-      <Link className="mx-5 bg-green-700" href={isAuthenticated ? "/employe/auth":"/employe"}>Home</Link>
-
-        {isAuthenticated ? (
-
-          <>
-            <Link className="mx-5 bg-green-700" href="/employe/auth/profile">Profile</Link>
-            
-            <Link className="mx-5 bg-green-700" href='/employe/auth/created'>created jobs and internships</Link>
-
-            <Link onClick={signoutHandler} className="mx-5 bg-green-700" href="">Logout</Link>
-          
-          </>) :
-          
-          (<>
-            
-            <Link className="mx-5 bg-green-700" href="/employe/signin">Signin</Link>
-        <Link className="mx-5 bg-green-700" href="/employe/signup">Signup</Link>
-   
-          
-          </>)
-        }
-       
-        
-
-      </nav>
+      <Navbar />
       {children}
+      <Footer/> 
     </>
   )
 }

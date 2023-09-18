@@ -1,42 +1,55 @@
 "use client"
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import InternshipCard from "@/components/employe ui/InternshipCard";
+import JobCard from "@/components/employe ui/JobCard";
 
-import { useSelector } from "react-redux"
+const Page = () => {
+  const { employe } = useSelector((state) => state.employeReducer);
+  const [showInternships, setShowInternships] = useState(true);
 
-const page = () => {
+  const toggleContent = (value) => {
+    setShowInternships(value);
+  };
 
-    const {employe} = useSelector(state => state.employeReducer)
-    return (
-        <>
-        
-            <h1>applied jobs and intenships { employe && employe.firstname}</h1>
-        
-      <ul className="bg-yellow-500">
-        {employe &&
-          employe.jobs.map((job) => (
-            <div className="m-5 bg-green-700" key={job._id}>
-              {JSON.stringify(job)} <br />
-              <br />
-              
-            </div>
-          ))}
-      </ul>
+  return (
+    <>
+      <h1 className="text-center font-semibold py-5 text-3xl">
+        Internships and Jobs created by {employe && employe.firstname}
+      </h1>
 
-      <hr />
+      <div className="flex justify-center space-x-4 mb-4">
+        <button
+          onClick={() => toggleContent(true)}
+          className={`${
+            showInternships ? "bg-blue-500 text-white" : "bg-gray-300"
+          } px-4 py-2 rounded-lg`}
+        >
+          Internships
+        </button>
+        <button
+          onClick={() => toggleContent(false)}
+          className={`${
+            !showInternships ? "bg-blue-500 text-white" : "bg-gray-300"
+          } px-4 py-2 rounded-lg`}
+        >
+          Jobs
+        </button>
+      </div>
 
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {showInternships
+          ? employe &&
+            employe.internships.map((internship) => (
+              <InternshipCard internship={internship} key={internship.id} employe={employe} />
+            ))
+          : employe &&
+            employe.jobs.map((job) => (
+              <JobCard job={job} key={job.id} employe={employe}/>
+            ))}
+      </div>
+    </>
+  );
+};
 
-      <ul className="bg-yellow-500">
-        {employe &&
-          employe.internships.map((internship) => (
-            <div className="m-5 bg-green-700" key={internship._id}>
-              {JSON.stringify(internship)} <br />
-              <br />
-              
-            </div>
-          ))}
-      </ul>
-        
-        </>
-  )
-}
-
-export default page
+export default Page;

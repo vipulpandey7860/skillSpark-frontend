@@ -204,8 +204,11 @@ const Navbar = () => {
               >
                 Register
               </Link>
+          <Link className='pl-4 border-l-2' href="/employe">Hire Talent</Link>
+
             </>)
           }
+
 
         </div>
       </div>

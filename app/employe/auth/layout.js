@@ -16,9 +16,7 @@ const employeAuth = ({ children }) => {
       router.push('/employe/')
     }
 
-   
-
-  }, [isAuthenticated])
+     }, [isAuthenticated])
   return (
     children
   )

@@ -84,7 +84,7 @@ const ProfilePage = () => {
       <div
         className="bg-cover bg-center h-64"
         style={{
-          backgroundImage: `url(${ student?.avatar.fileId || student?.avatar.url})`,
+          backgroundImage: `url(${ student.avatar.url || student.avatar.fileID })`,
         }}
       >
         <div className="container mx-auto">
@@ -113,7 +113,7 @@ const ProfilePage = () => {
                     onMouseLeave={handleAvatarLeave}
                   >
                     <img
-                      src={student?.avatar.fileId || student?.avatar.url}
+                      src={student.avatar.url || student.avatar.fileID}
                       className="rounded-full"
                       alt="Profile Image"
                     />

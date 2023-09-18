@@ -1,7 +1,6 @@
 "use client"
 
-import { asyncSigninemploye } from "@/store/Actions/employeAction";
-import Link from "next/link";
+import Signin from "@/components/employe ui/Signin";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
@@ -21,23 +20,10 @@ const page = () => {
     }
   }, [isAuthenticated])
 
-
-  const signinHandler = () => {
-    const employe = {
-      email: "vipul@gmail.com",
-      password: "Vipul@7860"
-    };
-    dispatch(asyncSigninemploye(employe))
-
-  }
   
   return (
     <>
-
-      <button className="bg-red-900 mx-5" onClick={signinHandler}>signin</button>
-
-      <Link href="/employe/forget" className="bg-red-900 mx-5" >forgot password</Link>
-      
+<Signin />      
     </>
   )
 }

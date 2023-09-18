@@ -70,10 +70,10 @@ const page = () => {
               Apply to 10,000+ internships for free
             </p>
             <p id="view_more">
-              <a href="#" class="text-blue-500 font-semibold hover:underline"
+              <p class="text-blue-500 font-semibold hover:underline"
               >View all Internships
                 <i class="fas fa-arrow-right ml-1"></i
-                ></a>
+                ></p>
             </p>
           </div>
 
@@ -142,10 +142,10 @@ const page = () => {
           <div class="description flex justify-between items-center">
             <p class="text-base font-semibold text-gray-700">Apply to 10,000+ internships for free</p>
             <p id="view_more">
-              <a href="#" class="text-blue-500 font-semibold hover:underline"
+              <p  class="text-blue-500 font-semibold hover:underline"
               >View all Internships
                 <i class="fas fa-arrow-right ml-1"></i
-                ></a>
+                ></p>
             </p>
           </div>
 

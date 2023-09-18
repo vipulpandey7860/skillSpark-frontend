@@ -1,26 +1,16 @@
-"use client";
+"use client"
 import InternshipCard from "@/components/student ui/InternshipCard";
 import JobCard from "@/components/student ui/JobCard";
-import { asyncApplyInternship, asyncApplyJob } from "@/store/Actions/studentAction";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 
 export const metadata = {
   title: 'Student | Home',
 };
 
-const page = () => {
-  const dispatch = useDispatch();
+const Page = () => {
   const { jobs, internships, student } = useSelector((state) => state.studentReducer);
   const [showInternships, setShowInternships] = useState(true);
-
-  const ApplyJobHandler = (id) => {
-    dispatch(asyncApplyJob(id));
-  };
-
-  const ApplyInternshipHandler = (id) => {
-    dispatch(asyncApplyInternship(id));
-  };
 
   useEffect(() => {
     // Add any necessary side effects here
@@ -30,9 +20,8 @@ const page = () => {
     setShowInternships(!showInternships);
   };
 
-
   return (
-    <>
+    <div className="container  mt-10 px-4">
       <div className="flex flex-col items-center gap-4 py-10">
         <h2 className="font-bold text-4xl">Hi, {student && student.firstname}👋</h2>
         <p className="text-2xl font-normal text-[#333333]">Let’s help you land your dream career</p>
@@ -55,24 +44,27 @@ const page = () => {
         </button>
       </div>
 
-        <p className="text-center text-xl text-semibold py-4">Available {showInternships ? "internships" : "jobs"} for {student && student.firstname}</p>
-      <div className="bg-[#F0FBFF] flex flex-row items-center gap-4 w-screen p-5 overflow-hidden">
+      <p className="text-center text-2xl font-semibold py-4">
+        Available {showInternships ? "Internships" : "Jobs"} for {student && student.firstname}
+      </p>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {showInternships
           ? internships &&
           internships.map((internship) => (
-
-            <InternshipCard key={internship._id} internship={internship} student={student}
-            ApplyInternshipHandler={ApplyInternshipHandler}
+            <InternshipCard
+              key={internship._id}
+              internship={internship}
+              
               />
           ))
           : jobs &&
           jobs.map((job) => (
-            <JobCard key={job._id} job={job} student={student}
-              ApplyJobHandler={ApplyJobHandler} />
+            <JobCard key={job._id} job={job} />
           ))}
       </div>
-    </>
+    </div>
   );
 };
 
-export default page;
+export default Page;

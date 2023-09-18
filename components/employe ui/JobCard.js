@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import { FaMapMarkerAlt, FaCalendar, FaClock, FaMoneyBillAlt } from 'react-icons/fa';
-const JobCard = ({ job }) => {
+const JobCard = ({ job,employe }) => {
 
   function joningSetter(status) {
     if (status === 'Open') {
@@ -16,11 +16,9 @@ const JobCard = ({ job }) => {
         <div className='flex items-center justify-between'>
           <div className='flex flex-col items-start gap-3'>
             <h4 className="text-lg text-[#484848] font-semibold">{job.title}</h4>
-            <p className='text-[#8B8B8B]'>{job.employe.organizationname}</p>
+            <p className='text-[#8B8B8B]'>{employe.organizationname}</p>
           </div>
-          <div >
-            <img src={job.employe.organizationlogo.fileID || job.employe.organizationlogo.url} alt="orginazation logo" className=' max-h-16' />
-          </div>
+         
         </div>
         <div className="flex text-[#8B8B8B] items-center pt-5 gap-2">
           <div className="flex items-center">
@@ -61,7 +59,7 @@ const JobCard = ({ job }) => {
           </div>
         </div>
         <div className="flex items-center justify-end mt-4">
-          <Link className='text-blue-400 border px-2 py-1 rounded-md border-blue-500' href={`/student/auth/view/job/${job._id}`}>View Details</Link>
+          <Link className='text-blue-400 border px-2 py-1 rounded-md border-blue-500' href={`/employe/auth/created/job/${job._id}`}>View Details</Link>
         </div>
       </div>
     </div>

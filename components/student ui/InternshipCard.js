@@ -1,44 +1,68 @@
+import Link from 'next/link';
 import React from 'react';
-import { MdLocationOn, MdAccessTime, MdAttachMoney } from 'react-icons/md';
+import { FaMapMarkerAlt, FaCalendar, FaClock, FaMoneyBillAlt } from 'react-icons/fa';
+const InternshipCard = ({ internship }) => {
 
-const InternshipCard = ({ internship, student, ApplyInternshipHandler }) => {
+  function convertISODateToCustomFormat(isoDate) {
+    const date = new Date(isoDate);
+    const year = date.getFullYear().toString().slice(-2); 
+    const month = (date.getMonth() + 1).toString().padStart(2, '0'); 
+    const day = date.getDate().toString().padStart(2, '0');
+    return `${month}/${day}/${year}`;
+  }
   return (
-    <div className="rounded-lg shadow-md overflow-hidden p-4 bg-white">
-      <div className='flex items-center justify-between'>
-
-      <div className="p-4  border-b border-gray-200">
-        <h2 className="text-xl font-semibold">{internship.profile}</h2>
-        <p className="text-sm text-gray-600">{internship.employe.organizationname }</p>
+      <div className="container w-[30vw]  m-5 ">
+      <div className="px-10 py-5 border rounded-lg shadow-lg">
+        <div className='flex items-center justify-between'>
+          <div className='flex flex-col items-start gap-3'>
+            <h4 className="text-lg text-[#484848] font-semibold">{internship.profile}</h4>
+            <p className='text-[#8B8B8B]'>{internship.employe.organizationname}</p>
+          </div>
+          <div >
+            <img src={internship.employe.organizationlogo.fileID || internship.employe.organizationlogo.url} alt="orginazation logo" className=' max-h-16' />
+          </div>
         </div>
-        <img className='h-12 w-12 ' src={internship.employe.organizationlogo.fileID || internship.employe.organizationlogo.url } alt="organization logo" />
-      </div>
-
-
-      <div className="p-4">
-        <div className="grid grid-cols-1 gap-4">
-          <p className="flex gap-2 items-center">
-            <MdLocationOn />  {internship.internshiptype}
-          </p>
-          <p className="flex gap-2 items-center">
-            <MdAccessTime />  {internship.duration}
-          </p>
-          <p className="flex gap-2 items-center">
-            <MdAttachMoney />  {internship.stipend.amount}
-          </p>
+        <div className="flex text-[#8B8B8B] items-center pt-5 gap-2">
+          <div className="flex items-center">
+            <FaMapMarkerAlt className="" />
+          </div>
+          <div className="flex flex-col">
+            <span className="text-gray-600 capitalize">{internship.internshiptype}</span>
+          </div>
         </div>
-      </div>
+        <div className='flex text-[#8B8B8B] items-center gap-8 py-6 border-b-2'>
 
-      <div className="p-4 border-t border-gray-200">
-        {!internship.students.includes(student && student._id) ? (
-          <button
-            className="bg-blue-900 text-white py-2 px-4 rounded-md w-full"
-            onClick={() => ApplyInternshipHandler(internship._id)}
-          >
-            Apply Internship
-          </button>
-        ) : (
-          <h3 className="bg-red-900 text-white p-2 rounded-md text-center">Already Applied</h3>
-        )}
+          <div className="flex flex-col items-start justify-center gap-2">
+            <div className="flex items-center gap-2 ">
+              <FaCalendar className="" />
+              <span className="uppercase text-xs font-medium">Starting</span>
+            </div>
+            <div className="flex ">
+              <span className="text-gray-700">{convertISODateToCustomFormat(internship.from)}</span>
+            </div>
+          </div>
+          <div className="flex flex-col items-start justify-center gap-2">
+            <div className="flex items-center gap-2">
+              <FaClock className="" />
+              <span className="uppercase text-xs font-medium">Duration</span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-gray-700">{internship.duration}</span>
+            </div>
+          </div>
+          <div className="flex flex-col items-start justify-center gap-2">
+            <div className="flex items-center gap-2">
+              <FaMoneyBillAlt className="" />
+              <span className="uppercase text-xs font-medium">Stipend</span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-gray-700">{internship.stipend.amount}</span>
+            </div>
+          </div>
+        </div>
+        <div className="flex items-center justify-end mt-4">
+          <Link className='text-blue-400 border px-2 py-1 rounded-md border-blue-500' href={`/student/auth/view/internship/${internship._id}`}>View Details</Link>
+        </div>
       </div>
     </div>
   );

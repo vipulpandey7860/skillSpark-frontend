@@ -27,7 +27,7 @@ export const asyncSignupemploye = (employe) => async (dispatch, getState) => {
     try {
 
         const { data } = await axios.post('/employe/signup', employe);
-        asyncCurrentemploye();
+        dispatch(asyncCurrentemploye());
     } catch (error) {
         dispatch(iserror(error.response.data.message))
     }
@@ -38,7 +38,8 @@ export const asyncSigninemploye = (employe) => async (dispatch, getState) => {
     try {
 
         const { data } = await axios.post('/employe/signin', employe);
-        asyncCurrentemploye();
+        dispatch(asyncCurrentemploye());
+        
     } catch (error) {
         dispatch(iserror(error.response.data.message))
     }
@@ -125,6 +126,26 @@ export const asyncCreateInternship = (internship) => async (dispatch, getState) 
 
     try {
         const { data } = await axios.post("/employe/internship/create/", internship);
+        dispatch(asyncCurrentemploye());
+    } catch (error) {
+        dispatch(iserror(error.response.data.message))
+    }
+}
+
+export const asyncCloseInternship = (id) => async (dispatch, getState) => {
+
+    try {
+        const { data } = await axios.post("/employe/internship/close/"+id );
+        dispatch(asyncCurrentemploye());
+    } catch (error) {
+        dispatch(iserror(error.response.data.message))
+    }
+}
+
+export const asyncCloseJob = (id) => async (dispatch, getState) => {
+
+    try {
+        const { data } = await axios.post("/employe/job/close/"+id );
         dispatch(asyncCurrentemploye());
     } catch (error) {
         dispatch(iserror(error.response.data.message))
