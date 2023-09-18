@@ -2,17 +2,18 @@
 
 import Footer from "@/components/student ui/Footer"
 import Navbar from "@/components/student ui/Navbar"
-import { asyncCurrentStudent,asyncSignoutStudent } from "@/store/Actions/studentAction"
-import Link from "next/link"
+import { asyncCurrentStudent } from "@/store/Actions/studentAction"
+import { removeerror } from "@/store/Reducers/studentReducer"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-
+import { toast } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 
 const StudentLayout = ({ children }) => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const { isAuthenticated } = useSelector(state => state.studentReducer)
+  const { isAuthenticated ,errors} = useSelector(state => state.studentReducer)
   
 
   useEffect(() => {
@@ -24,7 +25,19 @@ const StudentLayout = ({ children }) => {
     }
   }, [isAuthenticated])
 
- 
+
+  if (errors) {
+    errors.map((error) => {
+      if (error.includes("Login first to access this resource")) {
+        dispatch(removeerror())
+        return;
+      }
+      toast.error(error);
+      dispatch(removeerror())
+
+    })
+
+  }
 
   return (
     <>

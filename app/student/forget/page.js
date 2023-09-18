@@ -1,14 +1,14 @@
 "use client"
 import { asyncForgetPasswordStudent } from "@/store/Actions/studentAction";
-import { useRouter } from "next/navigation"; 
+import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react"; 
+import { useState } from "react";
 
 const ForgetPasswordPage = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const { errors} = useSelector((state) => state.studentReducer);
+  const { errors } = useSelector((state) => state.studentReducer);
   const [email, setEmail] = useState("");
 
   const sendEmailHandler = async () => {
@@ -18,9 +18,10 @@ const ForgetPasswordPage = () => {
 
     await dispatch(asyncForgetPasswordStudent(emailData));
 
-    if (errors.length === 1) {
+    // if(!errors){
       router.push("/student/forget/otp");
-    }
+    // }
+
   };
 
   return (
@@ -43,14 +44,7 @@ const ForgetPasswordPage = () => {
           required
         />
       </div>
-      {errors.length > 0 && (
-        <div className="text-red-600">
-          {errors.map((error, index) => (
-            <p key={index}>{error}</p>
-          ))}
 
-        </div>
-      )}
       <button
         onClick={sendEmailHandler}
         className="bg-green-700 text-white font-medium px-4 py-2 rounded-md hover:bg-green-600"

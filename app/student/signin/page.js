@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import {  useSelector } from "react-redux";
-import 'react-toastify/dist/ReactToastify.css';
 
 
 export const metadata = {

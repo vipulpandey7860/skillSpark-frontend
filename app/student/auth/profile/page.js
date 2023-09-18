@@ -103,7 +103,7 @@ const ProfilePage = () => {
           <div className="w-full mx-auto">
             <div className="card card-profile ">
               <div className="flex justify-center">
-                <div className="w-32 h-32  relative">
+                <div className="w-32 h-32  ">
                   <div
                     className={`card-profile-image cursor-pointer ${
                       isEditing && avatarHovered ? 'hover:opacity-80' : ''

@@ -3,25 +3,20 @@ import { asyncOTPPasswordStudent } from "@/store/Actions/studentAction";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { toast } from "react-toastify";
-
 const PasswordResetPage = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { errors } = useSelector((state) => state.studentReducer);
 
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordsMatch, setPasswordsMatch] = useState(true);
+  const {  errors } = useSelector(state => state.studentReducer)
 
-  const sentotpHandler = async () => {
-    if (!passwordsMatch) {
-      toast.error("Passwords do not match.");
-      return;
-    }
-
+  const sentotpHandler = async (e) => {
+    
+    e.preventDefault();
     const passwordData = {
       email: email,
       otp: otp,
@@ -29,13 +24,14 @@ const PasswordResetPage = () => {
       confirmPassword: confirmPassword,
     };
 
+
     dispatch(asyncOTPPasswordStudent(passwordData));
 
-    if (errors.length === 1) {
-      router.push("/student/signin");
-    } else {
-      toast.error(JSON.stringify(errors));
+    if (errors.length === 0) {
+      router.push("/student/auth");
     }
+
+
   };
 
   const handlePasswordConfirmation = () => {
@@ -115,13 +111,7 @@ const PasswordResetPage = () => {
             <p className="text-red-600 mt-2">Passwords do not match.</p>
           )}
         </div>
-        {errors.length > 0 && (
-          <div className="text-red-600 mb-5">
-            {errors.map((error, index) => (
-              <p key={index}>{error}</p>
-            ))}
-          </div>
-        )}
+       
         <button
           onClick={sentotpHandler}
           className="bg-red-900 text-white font-medium px-4 py-2 rounded-md hover:bg-red-800"

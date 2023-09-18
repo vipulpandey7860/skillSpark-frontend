@@ -8,12 +8,11 @@ import { useDispatch, useSelector } from 'react-redux';
 const StudentAuth = ({ children }) => {
     const dispatch = useDispatch();
     const router = useRouter();
-  const { isAuthenticated } = useSelector(state => state.studentReducer)
+  const { isAuthenticated,errors } = useSelector(state => state.studentReducer)
   
 
   useEffect(() => {
-
-    if (!isAuthenticated) {
+       if (!isAuthenticated) {
       router.push('/student/')
     }
 

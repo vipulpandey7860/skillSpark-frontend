@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 const Signup = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const { isAuthenticated, errors } = useSelector((state) => state.studentReducer);
+  const { isAuthenticated } = useSelector((state) => state.studentReducer);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -176,13 +176,7 @@ const Signup = () => {
               Terms and Conditions
             </Link>
           </p>
-          {errors && errors.length > 0 && (
-            <div className="text-red-500">
-              {errors.map((error, index) => (
-                <p key={index}>{error.msg}</p>
-              ))}
-            </div>
-          )}
+         
           <button
             onClick={signupHandler}
             className="bg-blue-500 text-white font-normal px-4 py-2 rounded-md mt-3 hover:bg-blue-700"

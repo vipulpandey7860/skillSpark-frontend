@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
-import { asyncSigninStudent } from '@/store/Actions/studentAction';
+import { asyncCurrentStudent, asyncSigninStudent } from '@/store/Actions/studentAction';
 import Link from 'next/link';
 
 const Signin = () => {
@@ -11,7 +11,7 @@ const Signin = () => {
 
     const dispatch = useDispatch();
     const router = useRouter();
-    const { isAuthenticated,errors } = useSelector((state) => state.studentReducer);
+    const { isAuthenticated } = useSelector((state) => state.studentReducer);
 
     useEffect(() => {
         if (isAuthenticated) {
@@ -26,7 +26,6 @@ const Signin = () => {
             password: e.target.password.value,
         };
         dispatch(asyncSigninStudent(student));
-
     };
 
     const siginPageCloseHandler = () => {
@@ -147,10 +146,10 @@ const Signin = () => {
                             </form>
                             <div className='flex flex-col gap-3 py-2'>
 
-                            <Link href="/student/forget" className="text-blue-400  ">
-                                forgot password?
-                            </Link>
-                            <Link href="/student/signup">Create account?</Link>
+                                <Link href="/student/forget" className="text-blue-400  ">
+                                    forgot password?
+                                </Link>
+                                <Link href="/student/signup">Create account?</Link>
                             </div>
 
                         </motion.div>
