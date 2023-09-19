@@ -1,6 +1,5 @@
 "use client"
-
-import Signin from "@/components/employe ui/Signin";
+import Signin from "@/components/common/Signin";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
@@ -9,7 +8,6 @@ export const metadata = {
 }
 const page = () => {
   const dispatch = useDispatch();
-
   const router = useRouter();
   const { isAuthenticated } = useSelector(state => state.employeReducer)
 
