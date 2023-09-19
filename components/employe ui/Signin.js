@@ -47,7 +47,7 @@ const Signin = () => {
 
     return (
         <div className="absolute top-0 left-0 h-screen w-screen bg-gray-800 bg-opacity-25 flex items-center justify-center">
-            <div className="relative group overflow-hidden h-[70vh] w-[40vw] bg-white p-5 rounded-md shadow-lg">
+            <div className="relative px-10 group overflow-hidden h-[65vh] w-[40vw] bg-white p-5 rounded-md shadow-lg">
                 <h3 className="text-center text-xl text-blue-500 font-normal px-4 py-2 relative">
                     Login
                     <button
@@ -107,17 +107,16 @@ const Signin = () => {
                         </div>
                         <button
                         type="submit"
-                        className="bg-blue-500 text-white font-normal px-4 py-2 rounded-md hover:bg-blue-700"
+                        className="bg-blue-500 w-full text-white font-normal px-4 py-2 rounded-md hover:bg-blue-700"
                     >
                         Login
                     </button>
-                        <div className='flex flex-col gap-3 py-2'>
-                            <Link href="/employe/forget" className="text-blue-400  ">
-                                forgot password?
-                            </Link>
-                            <Link className="text-blue-400" href="/employe/signup">Create account?</Link>
-
-                        </div>
+                    <div className='flex flex-col gap-4 py-2'>
+                        <Link href="/employe/forget" className="text-blue-400">
+                            Forgot password?
+                        </Link>
+                      <p className='text-black'>Don't have an account <Link className="text-blue-500" href="/employe/signup">Create one</Link></p>  
+                    </div>
                     </>
                     
                 </form>

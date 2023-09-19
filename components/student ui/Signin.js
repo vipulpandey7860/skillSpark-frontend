@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation'; 
 import { asyncSigninStudent } from '@/store/Actions/studentAction';
-
 import Link from 'next/link';
 
 const Signin = () => {
@@ -17,7 +16,7 @@ const Signin = () => {
 
     useEffect(() => {
         if (isAuthenticated) {
-            router.push('/atudent/auth');
+            router.push('/student/auth');
         }
     }, [isAuthenticated]);
 
@@ -25,16 +24,13 @@ const Signin = () => {
         e.preventDefault();
         dispatch(asyncSigninStudent(studentLoginForm));
         if (isAuthenticated) {
-
             router.push('/student/auth');
         }
     };
 
-
     const siginPageCloseHandler = () => {
         router.back();
     };
-
 
     const handleStudentInputChange = (e) => {
         const { name, value } = e.target;
@@ -46,7 +42,7 @@ const Signin = () => {
 
     return (
         <div className="absolute top-0 left-0 h-screen w-screen bg-gray-800 bg-opacity-25 flex items-center justify-center">
-            <div className="relative group overflow-hidden h-[70vh] w-[40vw] bg-white p-5 rounded-md shadow-lg">
+            <div className="relative px-10 group overflow-hidden h-[65vh] w-[40vw] bg-white p-5 rounded-md shadow-lg">
                 <h3 className="text-center text-xl text-blue-500 font-normal px-4 py-2 relative">
                     Login
                     <button
@@ -71,59 +67,51 @@ const Signin = () => {
                     </button>
                 </h3>
 
-
-
                 <form onSubmit={signinStudentHandler}>
-                    <>
-                        <div className="mb-4">
-                            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                                Email
-                            </label>
-                            <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                placeholder='Enter your email'
-                                required
-                                value={studentLoginForm.email}
-                                onChange={handleStudentInputChange}
-                                className="mt-1 px-3 py-2 block w-full border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                            />
-                        </div>
-                        <div className="mb-4">
-                            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                                Password
-                            </label>
-                            <input
-                                type="password"
-                                id="password"
-                                name="password"
-                                placeholder='Enter your password'
-                                required
-                                value={studentLoginForm.password}
-                                onChange={handleStudentInputChange}
-                                className="mt-1 px-3 py-2 block w-full border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                            />
-                        </div>
-
-                    </>
+                    <div className="mb-4">
+                        <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                            Email
+                        </label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder='Enter your email'
+                            required
+                            value={studentLoginForm.email}
+                            onChange={handleStudentInputChange}
+                            className="mt-1 px-3 py-2 w-full border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                            Password
+                        </label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder='Enter your password'
+                            required
+                            value={studentLoginForm.password}
+                            onChange={handleStudentInputChange}
+                            className="mt-1 px-3 py-2 w-full border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                        />
+                    </div>
 
                     <button
                         type="submit"
-                        className="bg-blue-500 text-white font-normal px-4 py-2 rounded-md hover:bg-blue-700"
+                        className="bg-blue-500 w-full text-white font-normal px-4 py-2 rounded-md hover:bg-blue-700"
                     >
                         Login
                     </button>
-                    <div className='flex flex-col gap-3 py-2'>
-                        <Link href="/employe/forget" className="text-blue-400  ">
-                            forgot password?
+                    <div className='flex flex-col gap-4 py-2'>
+                        <Link href="/student/forget" className="text-blue-400">
+                            Forgot password?
                         </Link>
-                        <Link className="text-blue-400" href="/employe/signup">Create account?</Link>
-
+                      <p className='text-black'>Don't have an account <Link className="text-blue-500" href="/student/signup">Create one</Link></p>  
                     </div>
                 </form>
-
-
             </div>
         </div>
     );

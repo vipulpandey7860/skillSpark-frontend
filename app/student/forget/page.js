@@ -2,7 +2,7 @@
 import { asyncForgetPasswordStudent } from "@/store/Actions/studentAction";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const ForgetPasswordPage = () => {
   const dispatch = useDispatch();
@@ -10,21 +10,26 @@ const ForgetPasswordPage = () => {
 
   const { errors } = useSelector((state) => state.studentReducer);
   const [email, setEmail] = useState("");
-  const [hasErrors, setHasErrors] = useState(false); 
+  // const [hasErrors, setHasErrors] = useState([]);
+
+  // useEffect(() => {
+  //   if (errors.length > 0) {
+  //     setHasErrors(true);
+
+  //   } else {
+  //     setHasErrors(false);
+  //   }
+  // }, [errors]);
 
   const sendEmailHandler = async () => {
 
     const emailData = {
       email: email,
     };
+    await dispatch(asyncForgetPasswordStudent(emailData));
 
-   await dispatch(asyncForgetPasswordStudent(emailData));
-
-    // if (errors) {
-    //   setHasErrors(true); 
-    //   return;
-    // } else {
-      router.push("/student/forget/otp");
+    // if (hasErrors) {
+    router.push("/student/forget/otp");
     // }
   };
 
@@ -56,11 +61,11 @@ const ForgetPasswordPage = () => {
         Send Email
       </button>
 
-      {hasErrors && (
+      {/* {hasErrors && (
         <div className="text-red-600 font-medium mt-2">
           Errors were found. Please check your input and try again.
         </div>
-      )}
+      )} */}
     </div>
   );
 };

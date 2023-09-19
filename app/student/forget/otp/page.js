@@ -24,7 +24,6 @@ const PasswordResetPage = () => {
       confirmPassword: confirmPassword,
     };
 
-
     dispatch(asyncOTPPasswordStudent(passwordData));
 
     if (errors.length === 0) {
