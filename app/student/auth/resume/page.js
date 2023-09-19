@@ -8,8 +8,7 @@ import jsPDF from 'jspdf';
 
 const ResumePage = () => {
     const resumeContainerRef = useRef(null);
-    const [editMode, setEditMode] = useState(false); // State for edit mode
-
+    const [editMode, setEditMode] = useState(false); 
     const handleDownloadPDF = () => {
         const pdf = new jsPDF('p', 'pt', 'a4');
         const resumeContainer = resumeContainerRef.current;
@@ -42,26 +41,29 @@ const ResumePage = () => {
         <>
             <h1 className="text-center text-4xl font-bold py-5">Resume</h1>
 
-            <div className="container px-24 py-5 shadow-md" ref={resumeContainerRef}>
+            <div className="container px-24 py-5 " ref={resumeContainerRef}>
                 <ResumeProfile />
                 <ResumeEducation isEditMode={editMode} />
                 <ResumeJobs isEditMode={editMode} />
-                {/* Add other resume components here */}
             </div>
 
+            <div className='flex items-center justify-center m-4 gap-4'>
+
             <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                className="bg-green-500  text-white font-bold py-2 px-4 rounded"
                 onClick={handleDownloadPDF}
             >
                 Download PDF
             </button>
 
             <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+                className="bg-yellow-500  text-white font-bold py-2 px-4 rounded "
                 onClick={toggleEditMode}
             >
                 {editMode ? 'Exit Edit Mode' : 'Edit Resume'}
-            </button>
+                </button>
+            </div>
+                
         </>
     );
 };

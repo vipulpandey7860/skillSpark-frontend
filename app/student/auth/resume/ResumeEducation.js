@@ -32,12 +32,12 @@ const ResumeEducation = ({ isEditMode }) => {
       year: 'Edit year of passing',
       percentage: 'Edit percentage / description',
     };
-  
+
     const updatedEducations = [...student.resume.education, newEducation];
-  
+
     dispatch(asyncAddEducation(updatedEducations));
   };
-  
+
 
   const editEducationHandler = (id) => {
     const educationToEdit = student.resume.education.find((edu) => edu.id === id);
@@ -62,111 +62,117 @@ const ResumeEducation = ({ isEditMode }) => {
 
   return (
     <div className="container ">
-      <section className="section_left border mx-5 flex flex-col p-4">
-        <h5 className="text-lg w-1/4  font-semibold mt-4">
+      <section className="section_left border mx-5 flex flex-row items-start  px-4">
+        <h5 className="text-lg w-1/5  font-semibold mt-4">
           Education{' '}
           {isEditMode && (
             <button
-              className="bg-blue-500 hover:bg-blue-600 text-white py-1 px-2 rounded ml-2"
+              className="   py-1 px-2 rounded ml-2"
               onClick={addEduHandler}
             >
               <FaPlusCircle className="mr-1" />
             </button>
           )}
         </h5>
+        <div className='flex flex-col items-start'>
 
-        {student &&
-          student.resume.education.map((edu, index) => (
-            <div key={edu.id} className=" pl-48 flex flex-row-reverse items-start justify-between  p-4">
-              <div className="flex items-center">
-                {isEditMode && !isEditing && (
-                  <>
-                    <button
-                      className="bg-blue-500 hover:bg-blue-600 text-white py-1 px-2 rounded mr-2"
-                      onClick={() => editEducationHandler(edu.id)}
-                    >
-                      <FaEdit className="mr-1" />
-                    </button>
-                    <button
-                      onClick={() => eduDeleteHandler(edu.id)}
-                      className="bg-red-500 hover:bg-red-600 text-white py-1 px-2 rounded"
-                    >
-                      <FaTrash className="mr-1" />
-                    </button>
-                  </>
-                )}
+          {student &&
+            student.resume.education.map((edu, index) => (
+
+              <div key={edu.id} className="w-full flex flex-row-reverse justify-between items-start  p-4">
+
+                <div className="flex gap-2 items-center  ">
+
+                  {isEditMode && !isEditing && (
+                    <>
+                      <button
+                        className="   py-1 px-2 rounded mr-2"
+                        onClick={() => editEducationHandler(edu.id)}
+                      >
+                        <FaEdit className="mr-1" />
+                      </button>
+                      <button
+                        onClick={() => eduDeleteHandler(edu.id)}
+                        className="  py-1 px-2 rounded"
+                      >
+                        <FaTrash className="mr-1" />
+                      </button>
+                    </>
+                  )}
+                </div>
+
+                <div className="pl-4 mt-2">
+                  <em className="opacity-50">
+                    <FaSchool className="mr-1" />
+                  </em>
+                  {isEditing && editedData.id === edu.id ? (
+                    <input
+                      type="text"
+                      name="schoolname"
+                      placeholder='Enter school name'
+                      value={editedData.schoolname}
+                      onChange={(e) =>
+                        setEditedData({ ...editedData, schoolname: e.target.value })
+                      }
+                      className="border rounded w-full py-1 px-2"
+                    />
+                  ) : (
+                    <p>{edu.schoolname}</p>
+                  )}
+                  <em className="opacity-50">
+                    <FaGraduationCap className="mr-1" />
+                  </em>
+                  {isEditing && editedData.id === edu.id ? (
+                    <input
+                      type="text"
+                      name="year"
+                      value={editedData.year}
+                      placeholder='Enter Year of passing'
+
+                      onChange={(e) =>
+                        setEditedData({ ...editedData, year: e.target.value })
+                      }
+                      className="border rounded w-full py-1 px-2"
+                    />
+                  ) : (
+                    <p>{edu.year}</p>
+                  )}
+                  <em className="opacity-50">
+                    <FaGraduationCap className="mr-1" />
+                  </em>
+                  {isEditing && editedData.id === edu.id ? (
+                    <input
+                      type="text"
+                      name="percentage"
+                      value={editedData.percentage}
+                      placeholder='Enter percentage/description'
+
+                      onChange={(e) =>
+                        setEditedData({ ...editedData, percentage: e.target.value })
+                      }
+                      className="border rounded w-full py-1 px-2"
+                    />
+                  ) : (
+                    <p>{edu.percentage}</p>
+                  )}
+                </div>
               </div>
-              <div className="pl-4 mt-2">
-                <em className="opacity-50">
-                  <FaSchool className="mr-1" />
-                </em>
-                {isEditing && editedData.id === edu.id ? (
-                  <input
-                    type="text"
-                    name="schoolname"
-                    placeholder='Enter school name'
-                    value={editedData.schoolname}
-                    onChange={(e) =>
-                      setEditedData({ ...editedData, schoolname: e.target.value })
-                    }
-                    className="border rounded w-full py-1 px-2"
-                  />
-                ) : (
-                  <p>{edu.schoolname}</p>
-                )}
-                <em className="opacity-50">
-                  <FaGraduationCap className="mr-1" />
-                </em>
-                {isEditing && editedData.id === edu.id ? (
-                  <input
-                    type="text"
-                    name="year"
-                    value={editedData.year}
-                    placeholder='Enter Year of passing'
-
-                    onChange={(e) =>
-                      setEditedData({ ...editedData, year: e.target.value })
-                    }
-                    className="border rounded w-full py-1 px-2"
-                  />
-                ) : (
-                  <p>{edu.year}</p>
-                )}
-                <em className="opacity-50">
-                  <FaGraduationCap className="mr-1" />
-                </em>
-                {isEditing && editedData.id === edu.id ? (
-                  <input
-                    type="text"
-                    name="percentage"
-                    value={editedData.percentage}
-                    placeholder='Enter percentage/description'
-
-                    onChange={(e) =>
-                      setEditedData({ ...editedData, percentage: e.target.value })
-                    }
-                    className="border rounded w-full py-1 px-2"
-                  />
-                ) : (
-                  <p>{edu.percentage}</p>
-                )}
-              </div>
-            </div>
-          ))}
+            ))}
+        </div>
 
         {isEditMode && isEditing && (
-          <div className="text-center">
+          <div className="text-center m-4 flex items-center">
             <button
-              className="bg-green-500 hover:bg-green-600 text-white py-1 px-2 rounded mt-2"
+              className="  py-1 px-2 rounded mt-2"
               onClick={saveEducationHandler}
             >
-              <FaSave className="mr-1" /> Save Changes
+              <FaSave className="mr-1" />
             </button>
             <button
-              className="bg-gray-500 hover:bg-gray-600 text-white py-1 px-2 rounded ml-2 mt-2"
+              className=" py-1 px-2 rounded ml-2 mt-2"
               onClick={cancelEditHandler}
             >
-              <FaTimes className="mr-1" /> Cancel
+              <FaTimes className="mr-1" />
             </button>
           </div>
         )}

@@ -21,7 +21,7 @@ const ProfilePage = () => {
     lastname: student ? student.lastname : "",
     address: student ? student.address : "",
     city: student ? student.city : "",
-    aboutMe: student ? student.aboutMe : "",
+    aboutme: student ? student.aboutme : "",
     contact: student ? student.contact : "",
     oldPassword: "",
     newPassword: "",
@@ -353,8 +353,8 @@ const ProfilePage = () => {
                       className={`form-input ${isEditing ? 'border' : 'bg-white'
                         } p-2 border rounded-md shadow-md`}
                       placeholder="A few words about you ..."
-                      name="aboutMe"
-                      value={formData.aboutMe}
+                      name="aboutme"
+                      value={formData.aboutme}
                       onChange={handleInputChange}
                       readOnly={!isEditing}
                     />
