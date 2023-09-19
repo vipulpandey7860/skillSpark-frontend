@@ -1,5 +1,6 @@
 "use client"
-import Signin from "@/components/common/Signin";
+// import Signin from "@/components/common/Signin";
+import Signin from "@/components/employe ui/Signin";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
@@ -18,10 +19,10 @@ const page = () => {
     }
   }, [isAuthenticated])
 
-  
+
   return (
     <>
-<Signin />      
+      <Signin />
     </>
   )
 }
