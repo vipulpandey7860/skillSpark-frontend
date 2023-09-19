@@ -2,7 +2,7 @@
 import InternshipCard from "@/components/student ui/InternshipCard";
 import JobCard from "@/components/student ui/JobCard";
 import { useEffect, useState } from "react";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 export const metadata = {
   title: 'Student | Home',
@@ -20,8 +20,10 @@ const Page = () => {
     setShowInternships(!showInternships);
   };
 
+  const noDataMessage = showInternships ? "No internships available" : "No jobs available";
+
   return (
-    <div className="container  mt-10 px-4">
+    <div className="container mt-10 px-4">
       <div className="flex flex-col items-center gap-4 py-10">
         <h2 className="font-bold text-4xl">Hi, {student && student.firstname}👋</h2>
         <p className="text-2xl font-normal text-[#333333]">Let’s help you land your dream career</p>
@@ -45,23 +47,23 @@ const Page = () => {
       </div>
 
       <p className="text-center text-2xl font-semibold py-4">
-        Available {showInternships ? "Internships" : "Jobs"} for {student && student.firstname}
+        {internships?.length > 0 || jobs?.length > 0
+          ? `Available ${showInternships ? "Internships" : "Jobs"} for ${student && student.firstname}`
+          : noDataMessage}
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {showInternships
-          ? internships &&
-          internships.map((internship) => (
-            <InternshipCard
-              key={internship._id}
-              internship={internship}
-              
-              />
-          ))
-          : jobs &&
-          jobs.map((job) => (
-            <JobCard key={job._id} job={job} />
-          ))}
+          ? internships && internships.length > 0 ? (
+              internships.map((internship) => (
+                <InternshipCard key={internship._id} internship={internship} />
+              ))
+            ) : null
+          : jobs && jobs.length > 0 ? (
+              jobs.map((job) => (
+                <JobCard key={job._id} job={job} />
+              ))
+            ) : null}
       </div>
     </div>
   );

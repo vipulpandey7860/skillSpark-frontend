@@ -27,9 +27,9 @@ const PasswordResetPage = () => {
 
     await dispatch(asyncOTPPasswordemploye(passwordData));
 
-    if (errors.length === 0) {
+    // if (errors.length === 0) {
       router.push("/employe/auth");
-    }
+    // }
   };
 
   const handlePasswordConfirmation = () => {

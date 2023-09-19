@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { differenceInMonths, format } from 'date-fns';
+
 import { asyncCreateInternship } from '@/store/Actions/employeAction';
 import { useRouter } from 'next/navigation';
 const InternshipCreation = () => {
@@ -64,27 +66,28 @@ const InternshipCreation = () => {
             to: date,
         });
     };
-
     useEffect(() => {
         if (internshipData.from && internshipData.to) {
-            const startDate = internshipData.from;
-            const endDate = internshipData.to;
-
-            // Calculate the duration in months (you can adjust this calculation)
-            const durationInMonths = Math.floor(
-                (endDate - startDate) / (30 * 24 * 60 * 60 * 1000)
-            );
-
-            // Update the duration field with the calculated value
+            const startDate = new Date(internshipData.from);
+            const endDate = new Date(internshipData.to);
+    
+            const yearDiff = endDate.getUTCFullYear() - startDate.getUTCFullYear();
+            const monthDiff = endDate.getUTCMonth() - startDate.getUTCMonth();
+    
+            const durationInMonths = yearDiff * 12 + monthDiff;
+    
+            const formattedDuration = `${durationInMonths} ${durationInMonths === 1 ? 'month' : 'months'}`;
+    
             setInternshipData({
                 ...internshipData,
-                duration: `${durationInMonths} months`,
+                duration: formattedDuration,
             });
         }
     }, [internshipData.from, internshipData.to]);
 
     const createInternshipHandler = () => {
         dispatch(asyncCreateInternship(internshipData));
+        router.push('/employe/auth');
 
     };
 

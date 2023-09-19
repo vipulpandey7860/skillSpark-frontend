@@ -10,18 +10,22 @@ const ForgetPasswordPage = () => {
 
   const { errors } = useSelector((state) => state.studentReducer);
   const [email, setEmail] = useState("");
+  const [hasErrors, setHasErrors] = useState(false); 
 
   const sendEmailHandler = async () => {
+
     const emailData = {
       email: email,
     };
 
-    await dispatch(asyncForgetPasswordStudent(emailData));
+   await dispatch(asyncForgetPasswordStudent(emailData));
 
-    // if(!errors){
+    // if (errors) {
+    //   setHasErrors(true); 
+    //   return;
+    // } else {
       router.push("/student/forget/otp");
     // }
-
   };
 
   return (
@@ -51,6 +55,12 @@ const ForgetPasswordPage = () => {
       >
         Send Email
       </button>
+
+      {hasErrors && (
+        <div className="text-red-600 font-medium mt-2">
+          Errors were found. Please check your input and try again.
+        </div>
+      )}
     </div>
   );
 };

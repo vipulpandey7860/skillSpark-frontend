@@ -30,6 +30,8 @@ const CreateJobComponent = () => {
 
     const createJobHandler = () => {
         dispatch(asyncCreateJob(jobData));
+        router.back()
+
         if (!errors) {
             router.back()
         }
@@ -98,7 +100,7 @@ const CreateJobComponent = () => {
                                 />
                             </div>
                             <div className="form-group flex flex-col gap-2">
-                                <label htmlFor="skills" className="form-control-label">Skills</label>
+                                <label htmlFor="skills" className="form-control-label">Skills <span className='text-xs ml-1'>(Comma seperated)</span> </label>
                                 <textarea
                                     rows="4"
                                     id="skills"
@@ -110,7 +112,7 @@ const CreateJobComponent = () => {
                                 />
                             </div>
                             <div className="form-group flex flex-col gap-2">
-                                <label htmlFor="perks" className="form-control-label">Perks</label>
+                                <label htmlFor="perks" className="form-control-label">Perks  <span className='text-xs ml-1'>(Comma seperated)</span></label>
                                 <textarea
                                     rows="4"
                                     id="perks"
