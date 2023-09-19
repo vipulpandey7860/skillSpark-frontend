@@ -1,5 +1,5 @@
 import {  useSelector } from "react-redux";
-import { FaPhone, FaEnvelope, FaGlobe, FaMapMarker, FaEdit, FaTrash } from 'react-icons/fa';
+import { FaPhone, FaEnvelope,  FaMapMarker, } from 'react-icons/fa';
 
 const ResumeProfile = () => {
   const { student } = useSelector((state) => state.studentReducer);
@@ -18,9 +18,6 @@ const ResumeProfile = () => {
           </li>
           <li className="flex items-center gap-4 opacity-60">
             <FaEnvelope className="mr-2" /> {student && student.email}
-          </li>
-          <li className="flex items-center gap-4 opacity-60">
-            <FaGlobe className="mr-2" /> {student && student.city}
           </li>
           <li className="flex items-center gap-4 opacity-60">
             <FaMapMarker className="mr-2" /> {student && student.address}
