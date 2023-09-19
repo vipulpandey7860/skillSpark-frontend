@@ -5,10 +5,17 @@ import ResumeJobs from './ResumeJob';
 import ResumeProfile from './ResumeProfile';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import ResumeInternship from './ResumeInternship';
+import ResumeCourses from './ResumeCourses';
+import ResumeProjects from './ResumeProjects';
+import ResumeSkills from './ResumeSkills';
+import ResumeAccomplishments from './ResumeAccomplishments';
 
 const ResumePage = () => {
     const resumeContainerRef = useRef(null);
     const [editMode, setEditMode] = useState(false); 
+
+    
     const handleDownloadPDF = () => {
         const pdf = new jsPDF('p', 'pt', 'a4');
         const resumeContainer = resumeContainerRef.current;
@@ -40,20 +47,13 @@ const ResumePage = () => {
     return (
         <>
             <h1 className="text-center text-4xl font-bold py-5">Resume</h1>
-
-            <div className="container px-24 py-5 " ref={resumeContainerRef}>
-                <ResumeProfile />
-                <ResumeEducation isEditMode={editMode} />
-                <ResumeJobs isEditMode={editMode} />
-            </div>
-
-            <div className='flex items-center justify-center m-4 gap-4'>
+            <div className='flex items-center justify-end px-24 m-4 gap-4'>
 
             <button
                 className="bg-green-500  text-white font-bold py-2 px-4 rounded"
                 onClick={handleDownloadPDF}
             >
-                Download PDF
+                Download Resume
             </button>
 
             <button
@@ -63,6 +63,19 @@ const ResumePage = () => {
                 {editMode ? 'Exit Edit Mode' : 'Edit Resume'}
                 </button>
             </div>
+
+            <div className="container px-24 py-5 mb-20 " ref={resumeContainerRef}>
+                <ResumeProfile />
+                <ResumeEducation isEditMode={editMode} />
+                <ResumeJobs isEditMode={editMode} />
+                <ResumeInternship isEditMode={editMode} />
+                <ResumeSkills isEditMode={editMode} />
+                <ResumeProjects isEditMode={editMode} />
+                <ResumeCourses isEditMode={editMode} />
+                <ResumeAccomplishments isEditMode={editMode} />
+            </div>
+
+            
                 
         </>
     );

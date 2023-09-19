@@ -8,45 +8,45 @@ import {
   FaTimes,
 } from 'react-icons/fa';
 import {
-  asyncDeleteEducation,
-  asyncAddEducation,
-  asyncEditEducation,
+  asyncDeleteInternship,
+  asyncAddInternship,
+    asyncEditInternship
 } from '@/store/Actions/studentAction';
 
-const ResumeEducation = ({ isEditMode }) => {
+const ResumeInternship = ({ isEditMode }) => {
   const dispatch = useDispatch();
   const { student } = useSelector((state) => state.studentReducer);
 
   const [editedData, setEditedData] = useState({});
   const [isEditing, setIsEditing] = useState(false);
 
-  const eduDeleteHandler = (id) => {
-    dispatch(asyncDeleteEducation(id));
+  const internDeleteHandler = (id) => {
+    dispatch(asyncDeleteInternship(id));
   };
 
-  const addEduHandler = () => {
-    const newEducation = {
+  const addInternHandler = () => {
+    const newIntern = {
       schoolname: 'Edit your school name',
       year: 'Edit year of passing',
       percentage: 'Edit percentage / description',
     };
 
-    const updatedEducations = [...student.resume.education, newEducation];
+    const updatedInternships = [...student.resume.internships, newIntern];
 
-    dispatch(asyncAddEducation(updatedEducations));
+    dispatch(asyncAddInternship(updatedInternships));
   };
 
-  const editEducationHandler = (id) => {
-    const educationToEdit = student.resume.education.find((edu) => edu.id === id);
-    if (educationToEdit) {
-      setEditedData(educationToEdit);
+  const editInternHandler = (id) => {
+    const internshiptoEdit = student.resume.internships.find((intern) => intern.id === id);
+    if (internshiptoEdit) {
+      setEditedData(internshiptoEdit);
       setIsEditing(true);
     }
   };
 
-  const saveEducationHandler = () => {
+  const saveInternHandler = () => {
     if (editedData.id) {
-      dispatch(asyncEditEducation(editedData.id, editedData));
+      dispatch(asyncEditInternship(editedData.id, editedData));
     }
     setIsEditing(false);
     setEditedData({});
@@ -61,11 +61,11 @@ const ResumeEducation = ({ isEditMode }) => {
     <div className="container">
       <section className="section_left border mx-5 flex flex-row items-start px-4">
         <h5 className="text-lg w-1/5  mt-4">
-          Education{' '}
+          Internship/s{' '}
           {isEditMode && (
             <button
               className="py-1 px-2 rounded ml-2"
-              onClick={addEduHandler}
+              onClick={addInternHandler}
             >
               <FaPlusCircle className="mr-1" />
             </button>
@@ -73,19 +73,19 @@ const ResumeEducation = ({ isEditMode }) => {
         </h5>
         <div className="flex flex-col items-start w-full">
           {student &&
-            student.resume.education.map((edu, index) => (
-              <div key={edu.id} className="w-full flex flex-row-reverse justify-between items-start px-4 pb-4 pt-2">
+            student.resume.internships.map((internship, index) => (
+                <div key={internship.id} className="w-full flex flex-row-reverse justify-between items-start px-4 pb-4 pt-2">
                 <div className="flex gap-2 items-center">
                   {isEditMode && !isEditing && (
                     <>
                       <button
                         className="py-1 px-2 rounded mr-2"
-                        onClick={() => editEducationHandler(edu.id)}
+                        onClick={() => editInternHandler(internship.id)}
                       >
                         <FaEdit className="mr-1" />
                       </button>
                       <button
-                        onClick={() => eduDeleteHandler(edu.id)}
+                        onClick={() => internDeleteHandler(internship.id)}
                         className="py-1 px-2 rounded"
                       >
                         <FaTrash className="mr-1" />
@@ -93,61 +93,71 @@ const ResumeEducation = ({ isEditMode }) => {
                     </>
                   )}
                 </div>
-                <div className="pl-4 mt-2 flex  flex-col gap-2">
-                  <div className="">
-                    <em className="opacity-50">School Name</em>
-                  {isEditing && editedData.id === edu.id ? (
+                <div className="pl-4 mt-2 flex flex-col gap-2 w-full">
+                  <div>
+                  <em className="opacity-50">Position</em>
+                  {isEditing && editedData.id === internship.id ? (
                     <input
                       type="text"
-                      name="schoolname"
-                      placeholder="Enter school name"
-                      value={editedData.schoolname}
+                      name="position"
+                      value={editedData.position}
                       onChange={(e) =>
-                        setEditedData({ ...editedData, schoolname: e.target.value })
+                        setEditedData({ ...editedData, position: e.target.value })
                       }
                       className="border rounded w-full py-1 px-2"
                     />
                   ) : (
-                    <p>{edu.schoolname}</p>
+                    <h5 className="text-lg font-semibold">{internship.position}</h5>
                     )}
                   </div>
-                    
-                  <div className="">
-                    <em className="opacity-50">Year of Passing:</em>
-                  {isEditing && editedData.id === edu.id ? (
+                  <div>
+                  <em className="opacity-50">Company</em>
+                  {isEditing && editedData.id === internship.id ? (
                     <input
                       type="text"
-                      name="year"
-                      placeholder="Enter Year of passing"
-                      value={editedData.year}
+                      name="company"
+                      value={editedData.company}
                       onChange={(e) =>
-                        setEditedData({ ...editedData, year: e.target.value })
+                        setEditedData({ ...editedData, company: e.target.value })
                       }
                       className="border rounded w-full py-1 px-2"
                     />
                   ) : (
-                    <p>{edu.year}</p>
+                    <p>{internship.company}</p>
                     )}
                   </div>
-                    
-                  <div className="">
-                    <em className="opacity-50">Percentage/Description:</em>
-                  {isEditing && editedData.id === edu.id ? (
-                    <input
-                      type="text"
-                      name="percentage"
-                      placeholder="Enter percentage/description"
-                      value={editedData.percentage}
+                  <div>
+                  <em className="opacity-50">Description</em>
+                  {isEditing && editedData.id === internship.id ? (
+                    <textarea
+                      name="description"
+                      value={editedData.description}
                       onChange={(e) =>
-                        setEditedData({ ...editedData, percentage: e.target.value })
+                        setEditedData({ ...editedData, description: e.target.value })
                       }
                       className="border rounded w-full py-1 px-2"
                     />
                   ) : (
-                    <p>{edu.percentage}</p>
+                    <p >{internship.description}</p>
                     )}
                   </div>
-                    
+                  
+                  <div className='flex items-center justify-between w-full'>
+                  <em className="opacity-50">Period of Work</em>
+                  {isEditing && editedData.id === internship.id ? (
+                    <input
+                      type="text"
+                      name="periodofwork"
+                      value={editedData.periodofwork}
+                      onChange={(e) =>
+                        setEditedData({ ...editedData, periodofwork: e.target.value })
+                      }
+                      className="border rounded w-full py-1 px-2"
+                    />
+                  ) : (
+                    <p  >{internship.periodofwork}</p>
+                    )}
+                    </div>
                 </div>
               </div>
             ))}
@@ -156,7 +166,7 @@ const ResumeEducation = ({ isEditMode }) => {
           <div className="text-center m-4 flex items-center">
             <button
               className="py-1 px-2 rounded mt-2"
-              onClick={saveEducationHandler}
+              onClick={saveInternHandler}
             >
               <FaSave className="mr-1" />
             </button>
@@ -173,4 +183,4 @@ const ResumeEducation = ({ isEditMode }) => {
   );
 };
 
-export default ResumeEducation;
+export default ResumeInternship;

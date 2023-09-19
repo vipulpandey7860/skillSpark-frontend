@@ -21,7 +21,7 @@ const Page = () => {
             }
         }, []);
 
-    }, []);
+    }, [employe, id]);
 
     function joiningSetter(status) {
         if (status === 'Open') {

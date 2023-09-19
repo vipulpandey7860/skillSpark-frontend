@@ -211,6 +211,7 @@ const Navbar = () => {
                 >
                   {(ref) => (
                     <div ref={ref} className="hover flex flex-col gap-4 absolute right-0 font-semibold p-4 w-40 bg-white rounded-lg shadow-md">
+                      <Link className="hover:text-blue-500" href="/student/auth">Home</Link>
                       <Link className="hover:text-blue-500" href="/student/auth/profile">Profile</Link>
                       <Link className="hover:text-blue-500" href="/student/auth/resume">Resume</Link>
                       <Link className="hover:text-blue-500" href="/student/auth/applied">Applied</Link>

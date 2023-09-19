@@ -22,7 +22,11 @@ const Page = () => {
                 setInternship(internship);
             }
         }, []);
-    }, []);
+    }, [employe, id]);
+
+    const CloseInternshipHandler = (id) => {
+        dispatch(asyncCloseInternship(id));
+    };
 
     function convertISODateToCustomFormat(isoDate) {
         const date = new Date(isoDate);

@@ -61,6 +61,8 @@ const Navbar = () => {
                 </div>
                 {profileDropdownVisible && (
                   <div className="hover flex flex-col gap-4 absolute right-0 font-semibold   p-4 w-40 bg-white rounded-lg shadow-md">
+                        <Link className="hover:text-blue-500" href="/employe/auth">Home</Link>
+
                         <Link className="hover:text-blue-500" href="/employe/auth/profile">Profile</Link>
                         <Link className="hover:text-blue-500" href="/employe/auth/created">Created jobs & internships</Link>
                         <button

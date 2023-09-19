@@ -111,6 +111,17 @@ export const asyncOTPPasswordStudent = (pwd) => async (dispatch, getState) => {
     }
 }
 
+export const asyncDeleteStudent = () => async (dispatch, getState) => {
+
+    try {
+        const { _id } = getState().studentReducer.student;
+        const { data } = await axios.post("/student/delete/" + _id);
+        dispatch(asyncSignoutStudent());
+    } catch (error) {
+        dispatch(iserror(error.response.data.message))
+    }
+}
+
 
 export const asyncGetJobs = () => async (dispatch, getState) => {
 
@@ -158,6 +169,10 @@ export const asyncApplyJob = (id) => async (dispatch, getState) => {
 }
 
 
+
+// ///////////////////////////////////resume education///////////////////////////////////////////////
+
+
 export const asyncAddEducation = (edu) => async (dispatch, getState) => {
 
     try {
@@ -190,8 +205,7 @@ export const asyncEditEducation = (id,edu) => async (dispatch, getState) => {
 }
 
 
-// ///////////////////////////////job //////////////////////////////////////
-
+///////////////////////////////// resume job///////////////////////////////////////
 
 export const asyncAddJob = (job) => async (dispatch, getState) => {
 
@@ -225,13 +239,174 @@ export const asyncEditJob = (id,job) => async (dispatch, getState) => {
 }
 
 
+///////////////////////////////resume internship/////////////////////////////////////
 
-export const asyncDeleteStudent = () => async (dispatch, getState) => {
+export const asyncAddInternship = (intern) => async (dispatch, getState) => {
 
     try {
-        const { _id } = getState().studentReducer.student;
-        const { data } = await axios.post("/student/delete/" + _id);
-        dispatch(asyncSignoutStudent());
+        const { data } = await axios.post("resume/add-intern/",intern);
+        dispatch(asyncCurrentStudent());
+    } catch (error) {   
+        dispatch(iserror(error.response.data.message))
+    }
+}
+
+export const asyncDeleteInternship = (id) => async (dispatch, getState) => {
+
+    try {
+        const { data } = await axios.post("resume/delete-intern/"+id);
+        dispatch(asyncCurrentStudent());
+    } catch (error) {
+        dispatch(iserror(error.response.data.message))
+    }
+}
+
+
+export const asyncEditInternship = (id,intern) => async (dispatch, getState) => {
+
+    try {
+        const { data } = await axios.post("resume/edit-intern/"+id,intern);
+        dispatch(asyncCurrentStudent());
+    } catch (error) {
+        dispatch(iserror(error.response.data.message))
+    }
+}
+
+
+///////////////////////////////resume courses/////////////////////////////////////
+
+export const asyncAddCourses = (course) => async (dispatch, getState) => {
+
+    try {
+        const { data } = await axios.post("resume/add-course/",course);
+        dispatch(asyncCurrentStudent());
+    } catch (error) {   
+        dispatch(iserror(error.response.data.message))
+    }
+}
+
+export const asyncDeleteCourses = (id) => async (dispatch, getState) => {
+
+    try {
+        const { data } = await axios.post("resume/delete-course/"+id);
+        dispatch(asyncCurrentStudent());
+    } catch (error) {
+        dispatch(iserror(error.response.data.message))
+    }
+}
+
+
+export const asyncEditCourses = (id,course) => async (dispatch, getState) => {
+
+    try {
+        const { data } = await axios.post("resume/edit-course/"+id,course);
+        dispatch(asyncCurrentStudent());
+    } catch (error) {
+        dispatch(iserror(error.response.data.message))
+    }
+}
+
+
+
+
+///////////////////////////////resume projects/////////////////////////////////////
+
+export const asyncAddProjects = (project) => async (dispatch, getState) => {
+
+    try {
+        const { data } = await axios.post("resume/add-project/",project);
+        dispatch(asyncCurrentStudent());
+    } catch (error) {   
+        dispatch(iserror(error.response.data.message))
+    }
+}
+
+export const asyncDeleteProjects = (id) => async (dispatch, getState) => {
+
+    try {
+        const { data } = await axios.post("resume/delete-project/"+id);
+        dispatch(asyncCurrentStudent());
+    } catch (error) {
+        dispatch(iserror(error.response.data.message))
+    }
+}
+
+
+export const asyncEditProjects = (id,project) => async (dispatch, getState) => {
+
+    try {
+        const { data } = await axios.post("resume/edit-project/"+id,project);
+        dispatch(asyncCurrentStudent());
+    } catch (error) {
+        dispatch(iserror(error.response.data.message))
+    }
+}
+
+
+
+///////////////////////////////resume skills/////////////////////////////////////
+
+export const asyncAddSkills = (skill) => async (dispatch, getState) => {
+
+    try {
+        const { data } = await axios.post("resume/add-skill/",skill);
+        dispatch(asyncCurrentStudent());
+    } catch (error) {   
+        dispatch(iserror(error.response.data.message))
+    }
+}
+
+export const asyncDeleteSkills = (id) => async (dispatch, getState) => {
+
+    try {
+        const { data } = await axios.post("resume/delete-skill/"+id);
+        dispatch(asyncCurrentStudent());
+    } catch (error) {
+        dispatch(iserror(error.response.data.message))
+    }
+}
+
+
+export const asyncEditSkills = (id,skill) => async (dispatch, getState) => {
+
+    try {
+        const { data } = await axios.post("resume/edit-skill/"+id,skill);
+        dispatch(asyncCurrentStudent());
+    } catch (error) {
+        dispatch(iserror(error.response.data.message))
+    }
+}
+
+
+
+///////////////////////////////resume Accomplishments/////////////////////////////////////
+
+export const asyncAddAccomplishments = (accomplishment) => async (dispatch, getState) => {
+
+    try {
+        const { data } = await axios.post("resume/add-accomplishment/",accomplishment);
+        dispatch(asyncCurrentStudent());
+    } catch (error) {   
+        dispatch(iserror(error.response.data.message))
+    }
+}
+
+export const asyncDeleteAccomplishments = (id) => async (dispatch, getState) => {
+
+    try {
+        const { data } = await axios.post("resume/delete-accomplishment/"+id);
+        dispatch(asyncCurrentStudent());
+    } catch (error) {
+        dispatch(iserror(error.response.data.message))
+    }
+}
+
+
+export const asyncEditAccomplishments = (id,accomplishment) => async (dispatch, getState) => {
+
+    try {
+        const { data } = await axios.post("resume/edit-accomplishment/"+id,accomplishment);
+        dispatch(asyncCurrentStudent());
     } catch (error) {
         dispatch(iserror(error.response.data.message))
     }
