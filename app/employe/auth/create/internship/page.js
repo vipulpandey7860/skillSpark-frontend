@@ -106,7 +106,7 @@ const InternshipCreation = () => {
                             <div className="form-group flex flex-col gap-2">
                                 <label htmlFor="profile" className="form-control-label">Profile</label>
                                 <input
-                                    type="text"
+                                    type="text" required
                                     id="profile"
                                     className="form-input p-2 border rounded-md shadow-md"
                                     placeholder="Profile"
@@ -120,6 +120,7 @@ const InternshipCreation = () => {
                                 <label htmlFor="internshiptype" className="form-control-label">Internship Type</label>
                                 <select
                                     id="internshiptype"
+                                    required
                                     className="form-input p-2 border rounded-md shadow-md"
                                     name="internshiptype"
                                     value={internshipData.internshiptype}
@@ -134,6 +135,7 @@ const InternshipCreation = () => {
                                 <label htmlFor="from" className="form-control-label">Internship Start Date</label>
                                 <DatePicker
                                     id="from"
+                                    required
                                     className="form-input p-2 border rounded-md shadow-md"
                                     selected={internshipData.from}
                                     onChange={handleStartDateChange}
@@ -145,6 +147,7 @@ const InternshipCreation = () => {
                                 <label htmlFor="to" className="form-control-label">Internship End Date</label>
                                 <DatePicker
                                     id="to"
+                                    required
                                     className="form-input p-2 border rounded-md shadow-md"
                                     selected={internshipData.to}
                                     onChange={handleEndDateChange}
@@ -156,6 +159,7 @@ const InternshipCreation = () => {
                                 <label htmlFor="duration" className="form-control-label">Duration</label>
                                 <input
                                     type="text"
+                                    required
                                     id="duration"
                                     placeholder="Duration"
                                     className="form-input p-2 border rounded-md shadow-md"
@@ -168,6 +172,7 @@ const InternshipCreation = () => {
                                 <input
                                     type="text"
                                     id="openings"
+                                    required
                                     className="form-input p-2 border rounded-md shadow-md"
                                     placeholder="Openings"
                                     name="openings"
@@ -182,6 +187,7 @@ const InternshipCreation = () => {
                                 <label htmlFor="stipend.amount" className="form-control-label">Stipend Amount</label>
                                 <input
                                     type="number"
+                                    required
                                     id="stipend.amount"
                                     className="form-input p-2 border rounded-md shadow-md"
                                     placeholder="Stipend Amount"
@@ -196,6 +202,7 @@ const InternshipCreation = () => {
                                     id="stipend.mode"
                                     className="form-input p-2 border rounded-md shadow-md"
                                     name="stipend.mode"
+                                    required
                                     value={internshipData.stipend.mode}
                                     onChange={handleInputChange}
                                 >
@@ -214,6 +221,7 @@ const InternshipCreation = () => {
                                     className="form-input p-2 border rounded-md shadow-md"
                                     placeholder="Skills"
                                     name="skills"
+                                    required
                                     value={internshipData.skills}
                                     onChange={handleInputChange}
                                 />
@@ -223,6 +231,7 @@ const InternshipCreation = () => {
                                 <textarea
                                     rows="4"
                                     id="responsibilities"
+                                    required
                                     className="form-input p-2 border rounded-md shadow-md"
                                     placeholder="Responsibilities"
                                     name="responsibilities"
@@ -235,7 +244,8 @@ const InternshipCreation = () => {
                                 <textarea
                                     rows="4" // Changed to textarea
                                     id="perks"
-                                    className="form-input p-2 border rounded-md shadow-md"
+                                    className="form-i
+                                    requirednput p-2 border rounded-md shadow-md"
                                     placeholder="Perks"
                                     name="perks"
                                     value={internshipData.perks}
@@ -243,10 +253,11 @@ const InternshipCreation = () => {
                                 />
                             </div>
                             <div className="form-group flex flex-col gap-2">
-                                <label htmlFor="description" className="form-control-label">Description</label>
+                                <label htmlFor="description" className="form-control-label">About company</label>
                                 <textarea
                                     rows="4"
                                     id="description"
+                                    required
                                     className="form-input p-2 border rounded-md shadow-md"
                                     placeholder="Description"
                                     name="description"
@@ -260,6 +271,7 @@ const InternshipCreation = () => {
                                 <textarea
                                     rows="4"
                                     id="assesments"
+                                    required
                                     className="form-input p-2 border rounded-md shadow-md"
                                     placeholder="Assessments"
                                     name="assesments"
@@ -273,6 +285,7 @@ const InternshipCreation = () => {
                                     id="status"
                                     className="form-input p-2 border rounded-md shadow-md"
                                     name="status"
+                                    required
                                     value={internshipData.status}
                                     onChange={handleInputChange}
                                 >

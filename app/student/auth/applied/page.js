@@ -68,7 +68,7 @@ const Page = () => {
             ? student && student.jobs.map((application) => (
                 <div key={application._id} className="border-t border-gray-300 p-2 hover:bg-gray-100">
                   <div className="grid grid-cols-6 text-center">
-                    <div className="text-left pl-2">
+                    <div className="text-center ">
                       {jobDataById[application._id] ? jobDataById[application._id].employe.organizationname : 'No name'}
                     </div>
                     <div>{application.title}</div>
@@ -82,7 +82,7 @@ const Page = () => {
             : student && student.internships.map((application) => (
                 <div key={application.id} className="border-t border-gray-300 p-2 hover:bg-gray-100">
                   <div className="grid grid-cols-6 text-center">
-                    <div className="text-left pl-2">{internshipDataById[application._id] ? internshipDataById[application._id].employe.organizationname : 'No name'}</div>
+                    <div className="text-center">{internshipDataById[application._id] ? internshipDataById[application._id].employe.organizationname : 'No name'}</div>
                     <div>{application.profile}</div>
                     <div>{application.internshiptype}</div>
                     <div>{application.openings}</div>

@@ -7,6 +7,8 @@ import {
   asyncUpdateemploye,
 } from '@/store/Actions/employeAction';
 
+
+
 const EmployerProfilePage = () => {
   const dispatch = useDispatch();
   const { employe } = useSelector((state) => state.employeReducer);
@@ -74,6 +76,7 @@ const EmployerProfilePage = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+
     setFormData({
       ...formData,
       [name]: value,
@@ -110,12 +113,13 @@ const EmployerProfilePage = () => {
                 <div className="w-32 h-32  ">
                   <div
                     className={`card-profile-image cursor-pointer ${
-                      isEditing && logoHovered ? 'hover:opacity-80' : ''
+                      isEditing && logoHovered ? 'hover:opacity-30 ' : ''
                     }`}
                     onClick={handleLogoClick}
                     onMouseEnter={handleLogoHover}
                     onMouseLeave={handleLogoLeave}
                   >
+                    
                     <img
                       src={employe?.organizationlogo.url}
                       className="rounded-full"

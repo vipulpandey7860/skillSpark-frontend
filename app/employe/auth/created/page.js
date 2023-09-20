@@ -12,6 +12,9 @@ const Page = () => {
     setShowInternships(value);
   };
 
+  const internshipList = employe ? employe.internships : [];
+  const jobList = employe ? employe.jobs : [];
+
   return (
     <>
       <h1 className="text-center font-semibold py-5 text-3xl">
@@ -39,14 +42,20 @@ const Page = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {showInternships
-          ? employe &&
-            employe.internships.map((internship) => (
-              <InternshipCard internship={internship} key={internship.id} employe={employe} />
-            ))
-          : employe &&
-            employe.jobs.map((job) => (
-              <JobCard job={job} key={job.id} employe={employe}/>
-            ))}
+          ? internshipList.length === 0 ? (
+              <p className="text-red-500 font-semibold text-end p-10 relative left-80">No internships found.</p>
+            ) : (
+              internshipList.map((internship) => (
+                <InternshipCard internship={internship} key={internship._id} employe={employe} />
+              ))
+            )
+          : jobList.length === 0 ? (
+              <p className="text-red-500 font-semibold text-end p-10 relative left-80">No jobs found.</p>
+            ) : (
+              jobList.map((job) => (
+                <JobCard job={job} key={job.id} employe={employe} />
+              ))
+            )}
       </div>
     </>
   );

@@ -118,7 +118,7 @@ const ProfilePage = () => {
               <div className="flex justify-center">
                 <div className="w-32 h-32  ">
                   <div
-                    className={`card-profile-image cursor-pointer ${isEditing && avatarHovered ? 'hover:opacity-80' : ''
+                    className={`card-profile-image cursor-pointer ${isEditing && avatarHovered ? 'hover:opacity-30' : ''
                       }`}
                     onClick={handleAvatarClick}
                     onMouseEnter={handleAvatarHover}

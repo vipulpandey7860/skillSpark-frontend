@@ -124,7 +124,7 @@ const CreateJobComponent = () => {
                                 />
                             </div>
                             <div className="form-group flex flex-col gap-2">
-                                <label htmlFor="description" className="form-control-label">Description</label>
+                                <label htmlFor="description" className="form-control-label">About company</label>
                                 <textarea
                                     rows="4"
                                     id="description"

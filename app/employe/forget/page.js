@@ -18,8 +18,8 @@ const ForgetPasswordPage = () => {
 
     await dispatch(asyncForgetPasswordemploye(emailData));
 
-      router.push("/employe/forget/otp");
-   
+    await router.push("/employe/forget/otp");
+
   };
 
   return (
