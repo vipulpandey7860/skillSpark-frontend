@@ -2,9 +2,9 @@
 
 import Signup from "@/components/employe ui/Signup";
 
-export const metadata = {
-    title: 'Employe | Signup',
-  }
+// export const metadata = {
+//     title: 'Employe | Signup',
+//   }
 
 const page = () => {
 

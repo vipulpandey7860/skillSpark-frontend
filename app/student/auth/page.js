@@ -4,9 +4,9 @@ import JobCard from "@/components/student ui/JobCard";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-export const metadata = {
-  title: 'Student | Home',
-};
+// export const metadata = {
+//   title: 'Student | Home',
+// };
 
 const Page = () => {
   const { jobs, internships, student } = useSelector((state) => state.studentReducer);

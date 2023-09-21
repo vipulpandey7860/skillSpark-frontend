@@ -4,9 +4,9 @@ import Signin from "@/components/employe ui/Signin";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
-export const metadata = {
-  title: 'employe | Signup',
-}
+// export const metadata = {
+//   title: 'employe | Signup',
+// }
 const page = () => {
   const dispatch = useDispatch();
   const router = useRouter();

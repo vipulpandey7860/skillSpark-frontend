@@ -11,6 +11,10 @@ import { useDispatch, useSelector } from "react-redux"
 import { toast } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
 
+export const metadata = {
+  title: 'Internshala | Student',
+};
+
 const StudentLayout = ({ children }) => {
   const dispatch = useDispatch();
   const router = useRouter();
