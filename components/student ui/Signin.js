@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useRouter } from 'next/navigation'; 
+import { useRouter } from 'next/navigation';
 import { asyncSigninStudent } from '@/store/Actions/studentAction';
 import Link from 'next/link';
 
@@ -41,8 +41,8 @@ const Signin = () => {
     };
 
     return (
-        <div className="absolute top-0 left-0 h-screen w-screen bg-gray-800 bg-opacity-25 flex items-center justify-center">
-            <div className="relative px-10 group overflow-hidden h-[65vh] w-[40vw] bg-white p-5 rounded-md shadow-lg">
+        <div className="absolute px-5 top-0 left-0 h-screen w-screen bg-gray-800 bg-opacity-25 flex items-center justify-center">
+            <div className="relative px-10 py-10 group overflow-hidden sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl w-full bg-white p-5 rounded-lg shadow-lg">
                 <h3 className="text-center text-xl text-blue-500 font-normal px-4 py-2 relative">
                     Login
                     <button
@@ -109,7 +109,7 @@ const Signin = () => {
                         <Link href="/student/forget" className="text-blue-400">
                             Forgot password?
                         </Link>
-                      <p className='text-black'>Don't have an account <Link className="text-blue-500" href="/student/signup">Create one</Link></p>  
+                        <p className='text-black'>Don't have an account <Link className="text-blue-500" href="/student/signup">Create one</Link></p>
                     </div>
                 </form>
             </div>

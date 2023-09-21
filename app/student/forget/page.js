@@ -10,16 +10,7 @@ const ForgetPasswordPage = () => {
 
   const { errors } = useSelector((state) => state.studentReducer);
   const [email, setEmail] = useState("");
-  // const [hasErrors, setHasErrors] = useState([]);
-
-  // useEffect(() => {
-  //   if (errors.length > 0) {
-  //     setHasErrors(true);
-
-  //   } else {
-  //     setHasErrors(false);
-  //   }
-  // }, [errors]);
+ 
 
   const sendEmailHandler = async () => {
 
@@ -34,7 +25,7 @@ const ForgetPasswordPage = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex flex-col items-center py-20 text-center min-h-screen bg-gray-100">
       <header className="mb-8 text-2xl font-semibold text-gray-700">
         Enter email address to reset password
       </header>

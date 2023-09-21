@@ -38,7 +38,7 @@ const CreateJobComponent = () => {
     };
 
     return (
-        <div className="border rounded-lg mt-5 order-first xl:col-span-8 m-10">
+        <div className="border rounded-lg mt-5 order-first xl:col-span-8 md:m-10">
             <div className="bg-secondary shadow card">
                 <div className="bg-white border-0 card-header">
                     <div className="flex items-center justify-between p-5">
@@ -47,7 +47,7 @@ const CreateJobComponent = () => {
                 </div>
                 <div className="card-body px-5 text-[#314362]">
                     <form>
-                        <div className="grid grid-cols-2 gap-4 px-4 py-10 border-b">
+                        <div className="grid grid-cols-1 md:grid-cols-1    gap-4 px-4 py-10 border-b">
                             <div className="form-group flex flex-col gap-2">
                                 <label htmlFor="title" className="form-control-label">Job Title</label>
                                 <input

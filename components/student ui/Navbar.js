@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
 import { asyncDeleteStudent, asyncSignoutStudent } from '@/store/Actions/studentAction';
 import { useRouter } from 'next/navigation';
-import { Transition } from '@headlessui/react'; // Add import for transition
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -46,12 +45,12 @@ const Navbar = () => {
     if (confirm('Are you sure you want to delete your account?')) {
       dispatch(asyncDeleteStudent());
     }
-  };  
+  };
 
   return (
     <header className="bg-white shadow-md text-[#676566] font-semibold">
       <div className="container mx-auto flex flex-wrap items-center justify-between py-4 px-8">
-        <Link href={isAuthenticated ? "/student/auth" : "/student"} className="logo cursor-pointer">
+        <Link href={isAuthenticated ? '/student/auth' : '/student'} className="logo cursor-pointer">
           <img
             className="w-32"
             src="https://internshala.com/static/images/common/new_internshala_logo.svg"
@@ -60,129 +59,110 @@ const Navbar = () => {
         </Link>
         <nav className="flex space-x-6 lg:space-x-10">
           <ul id="nav_link" className="hidden lg:flex space-x-6">
-            <li
-              className={`relative group ${internshipDropdownVisible ? 'hover-open' : ''}`}
-              onMouseEnter={toggleInternshipDropdown}
-              onMouseLeave={toggleInternshipDropdown}
-            >
-              <div className="nav-hover cursor-pointer flex items-center">
-                Internships <FaCaretDown className={`ml-1 h-4 w-4 transform ${internshipDropdownVisible ? 'rotate-180' : ''}`} />
-              </div>
-              <Transition
-                show={internshipDropdownVisible}
-                enter="transition-opacity duration-200"
-                enterFrom="opacity-0"
-                enterTo="opacity-100"
-                leave="transition-opacity duration-200"
-                leaveFrom="opacity-100"
-                leaveTo="opacity-0"
+            <li className={`relative group ${internshipDropdownVisible ? 'group-hover:block' : 'group-hover:hidden'}`}>
+              <div
+                className="nav-hover cursor-pointer flex items-center"
+                onMouseEnter={toggleInternshipDropdown}
+                onMouseLeave={toggleInternshipDropdown}
               >
-                {(ref) => (
-                  <div ref={ref} className="absolute mt-2 font-normal p-4 w-96 bg-white rounded-lg shadow-md">
-                    <div className="flex justify-between">
-                      <div className="space-y-2">
-                        <h5>Location</h5>
-                        <h5>Profile</h5>
-                        <h5>Category</h5>
-                        <h5>Specialization</h5>
-                        <p>with Guaranteed internships</p>
-                      </div>
-                      <div>
-                        <ul>
-                          <li>
-                            <a href="#">Work from Home</a>
-                          </li>
-                          <li>
-                            <a href="#">Internship in Bangalore</a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </Transition>
-            </li>
-            <li
-              className={`relative group ${jobDropdownVisible ? 'hover-open' : ''}`}
-              onMouseEnter={toggleJobDropdown}
-              onMouseLeave={toggleJobDropdown}
-            >
-              <div className="nav-hover cursor-pointer flex items-center">
-                Jobs <FaCaretDown className={`ml-1 h-4 w-4 transform ${jobDropdownVisible ? 'rotate-180' : ''}`} />
+                Internships{' '}
+                <FaCaretDown
+                  className={`ml-1 h-4 w-4 transform ${internshipDropdownVisible ? 'rotate-180' : ''}`}
+                />
               </div>
-              <Transition
-                show={jobDropdownVisible}
-                enter="transition-opacity duration-200"
-                enterFrom="opacity-0"
-                enterTo="opacity-100"
-                leave="transition-opacity duration-200"
-                leaveFrom="opacity-100"
-                leaveTo="opacity-0"
+              <div
+                className={`absolute mt-2 font-normal p-4 w-96 bg-white rounded-lg shadow-md transition-opacity ${
+                  internshipDropdownVisible ? 'opacity-100' : 'opacity-0'
+                }`}
               >
-                {(ref) => (
-                  <div ref={ref} className="absolute mt-2 font-normal p-4 w-96 bg-white rounded-lg shadow-md">
-                    <div className="flex justify-between">
-                      <div className="space-y-2">
-                        <h5>Location</h5>
-                        <h5>Profile</h5>
-                        <h5>Category</h5>
-                        <h5>Specialization</h5>
-                        <p>with Guaranteed jobs</p>
-                      </div>
-                      <div>
-                        <ul>
-                          <li>
-                            <a href="#">Work from Home</a>
-                          </li>
-                          <li>
-                            <a href="#">Jobs in Bangalore</a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
+                <div className="flex justify-between">
+                  <div className="space-y-2">
+                    <h5>Location</h5>
+                    <h5>Profile</h5>
+                    <h5>Category</h5>
+                    <h5>Specialization</h5>
+                    <p>with Guaranteed internships</p>
                   </div>
-                )}
-              </Transition>
+                  <div>
+                    <ul>
+                      <li>
+                        <a href="#">Work from Home</a>
+                      </li>
+                      <li>
+                        <a href="#">Internship in Bangalore</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
             </li>
-            <li
-              className={`relative group ${courseDropdownVisible ? 'hover-open' : ''}`}
-              onMouseEnter={toggleCourseDropdown}
-              onMouseLeave={toggleCourseDropdown}
-            >
-              <div className="nav-hover cursor-pointer flex items-center">
-                Courses <span className="offer bg-yellow-500 px-2 ml-2 rounded-md text-white">OFFER</span>{' '}
+            <li className={`relative group ${jobDropdownVisible ? 'group-hover:block' : 'group-hover:hidden'}`}>
+              <div
+                className="nav-hover cursor-pointer flex items-center"
+                onMouseEnter={toggleJobDropdown}
+                onMouseLeave={toggleJobDropdown}
+              >
+                Jobs{' '}
+                <FaCaretDown className={`ml-1 h-4 w-4 transform ${jobDropdownVisible ? 'rotate-180' : ''}`} />
+              </div>
+              <div
+                className={`absolute mt-2 font-normal p-4 w-96 bg-white rounded-lg shadow-md transition-opacity ${
+                  jobDropdownVisible ? 'opacity-100' : 'opacity-0'
+                }`}
+              >
+                <div className="flex justify-between">
+                  <div className="space-y-2">
+                    <h5>Location</h5>
+                    <h5>Profile</h5>
+                    <h5>Category</h5>
+                    <h5>Specialization</h5>
+                    <p>with Guaranteed jobs</p>
+                  </div>
+                  <div>
+                    <ul>
+                      <li>
+                        <a href="#">Work from Home</a>
+                      </li>
+                      <li>
+                        <a href="#">Jobs in Bangalore</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li className={`relative group ${courseDropdownVisible ? 'group-hover:block' : 'group-hover:hidden'}`}>
+              <div
+                className="nav-hover cursor-pointer flex items-center"
+                onMouseEnter={toggleCourseDropdown}
+                onMouseLeave={toggleCourseDropdown}
+              >
+                Courses{' '}
+                <span className="offer bg-yellow-500 px-2 ml-2 rounded-md text-white">OFFER</span>{' '}
                 <FaCaretDown className={`ml-1 h-4 w-4 transform ${courseDropdownVisible ? 'rotate-180' : ''}`} />
               </div>
-              <Transition
-                show={courseDropdownVisible}
-                enter="transition-opacity duration-200"
-                enterFrom="opacity-0"
-                enterTo="opacity-100"
-                leave="transition-opacity duration-200"
-                leaveFrom="opacity-100"
-                leaveTo="opacity-0"
+              <div
+                className={`absolute mt-2 font-normal p-4 w-96 bg-white rounded-lg shadow-md transition-opacity ${
+                  courseDropdownVisible ? 'opacity-100' : 'opacity-0'
+                }`}
               >
-                {(ref) => (
-                  <div ref={ref} className="absolute mt-2 font-normal p-4 w-96 bg-white rounded-lg shadow-md">
-                    <div className="flex justify-between">
-                      <div className="space-y-2">
-                        <h5>Most Popular</h5>
-                        <h5>Programming</h5>
-                      </div>
-                      <div>
-                        <ul>
-                          <li>
-                            <a href="#">Web Development</a>
-                          </li>
-                          <li>
-                            <a href="#">Digital Marketing</a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
+                <div className="flex justify-between">
+                  <div className="space-y-2">
+                    <h5>Most Popular</h5>
+                    <h5>Programming</h5>
                   </div>
-                )}
-              </Transition>
+                  <div>
+                    <ul>
+                      <li>
+                        <a href="#">Web Development</a>
+                      </li>
+                      <li>
+                        <a href="#">Digital Marketing</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
             </li>
           </ul>
         </nav>
@@ -190,47 +170,64 @@ const Navbar = () => {
           {isAuthenticated ? (
             <>
               <div
-                className={`relative group ${profileDropdownVisible ? 'hover-open' : ''}`}
+                className={`relative group ${profileDropdownVisible ? 'group-hover:block' : 'group-hover:hidden'}`}
                 onMouseEnter={toggleProfileDropdown}
                 onMouseLeave={toggleProfileDropdown}
               >
                 <div className="nav-hover cursor-pointer flex items-center">
                   <div className=" rounded-full border p-1">
-                    <img src={student?.avatar?.url || student?.avatar?.fileID} alt="profile" className="w-8 h-8 rounded-full" />
+                    <img
+                      src={student?.avatar?.url || student?.avatar?.fileID}
+                      alt="profile"
+                      className="w-8 h-8 rounded-full"
+                    />
                   </div>
                   <FaCaretDown className={`ml-1 h-4 w-4 transform ${profileDropdownVisible ? 'rotate-180' : ''}`} />
                 </div>
-                <Transition
-                  show={profileDropdownVisible}
-                  enter="transition-opacity duration-200"
-                  enterFrom="opacity-0"
-                  enterTo="opacity-100"
-                  leave="transition-opacity duration-200"
-                  leaveFrom="opacity-100"
-                  leaveTo="opacity-0"
+                <div
+                  className={`hover flex flex-col gap-4 absolute right-0 font-semibold p-4 w-40 bg-white rounded-lg shadow-md transition-opacity ${
+                    profileDropdownVisible ? 'opacity-100' : 'opacity-0'
+                  }`}
                 >
-                  {(ref) => (
-                    <div ref={ref} className="hover flex flex-col gap-4 absolute right-0 font-semibold p-4 w-40 bg-white rounded-lg shadow-md">
-                      <Link className="hover:text-blue-500" href="/student/auth">Home</Link>
-                      <Link className="hover:text-blue-500" href="/student/auth/profile">Profile</Link>
-                      <Link className="hover:text-blue-500" href="/student/auth/resume">Resume</Link>
-                      <Link className="hover:text-blue-500" href="/student/auth/applied">Applied</Link>
-                      <button onClick={signoutHandler} className="hover:text-blue-500 text-left">Logout</button>
-                      <button onClick={accountDeleteHandler} className="hover:text-blue-500 text-left">Delete account</button>
-                    </div>
-                  )}
-                </Transition>
+                  <Link className="hover:text-blue-500" href="/student/auth">
+                    Home
+                  </Link>
+                  <Link className="hover:text-blue-500" href="/student/auth/profile">
+                    Profile
+                  </Link>
+                  <Link className="hover:text-blue-500" href="/student/auth/resume">
+                    Resume
+                  </Link>
+                  <Link className="hover:text-blue-500" href="/student/auth/applied">
+                    Applied
+                  </Link>
+                  <button onClick={signoutHandler} className="hover:text-blue-500 text-left">
+                    Logout
+                  </button>
+                  <button onClick={accountDeleteHandler} className="hover:text-blue-500 text-left">
+                    Delete account
+                  </button>
+                </div>
               </div>
             </>
           ) : (
             <>
-              <Link href="/student/signin" className="button font-normal px-4 py-1 rounded-md bg-white text-blue-500 border border-blue-500">
+              <Link
+                href="/student/signin"
+                className="button font-normal px-4 py-1 rounded-md bg-white text-blue-500 border border-blue-500"
+              >
                 Login
               </Link>
-                <Link href="/student/signup" className="button font-normal px-4 py-1 rounded-md bg-blue-500 hover:bg-blue-700 text-white" id="register">
+              <Link
+                href="/student/signup"
+                className="button font-normal px-4 py-1 rounded-md bg-blue-500 hover:bg-blue-700 text-white"
+                id="register"
+              >
                 Register
               </Link>
-                <Link className='pl-4 border-l-2' href="/employe">Hire Talent</Link>
+              <Link className="pl-4 border-l-2" href="/employe">
+                Hire Talent
+              </Link>
             </>
           )}
         </div>

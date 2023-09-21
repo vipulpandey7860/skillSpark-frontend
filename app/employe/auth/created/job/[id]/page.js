@@ -43,7 +43,7 @@ const Page = () => {
         <>
             <h2 className='font-bold capitalize text-3xl text-center pt-10'>{job?.title} at {employe?.organizationname}</h2>
 
-            <section className="container mx-auto max-w-5xl border m-6 p-4 bg-white shadow-lg rounded-lg">
+            <section className="container mx-auto max-w-5xl border m-6 md:p-4 bg-white shadow-lg rounded-lg">
 
                 <div className="container m-5">
                     <div className="">
@@ -61,7 +61,7 @@ const Page = () => {
                                 <span className="text-gray-600 capitalize">{job?.jobtype}</span>
                             </div>
                         </div>
-                        <div className='flex text-[#8B8B8B] items-center gap-8 py-6 border-b-2'>
+                        <div className='grid grid-cols-3 md:flex text-[#8B8B8B] md:w-[95%] items-center gap-8 py-6 border-b-2'>
 
                             <div className="flex flex-col items-start justify-center gap-2">
                                 <div className="flex items-center gap-2 ">

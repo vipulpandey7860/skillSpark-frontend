@@ -47,24 +47,25 @@ const ResumePage = () => {
     return (
         <>
             <h1 className="text-center text-4xl font-bold py-5">Resume</h1>
+
             <div className='flex items-center justify-end px-24 m-4 gap-4'>
 
             <button
                 className="bg-green-500  text-white font-bold py-2 px-4 rounded"
                 onClick={handleDownloadPDF}
             >
-                Download Resume
+                Download 
             </button>
 
             <button
                 className="bg-yellow-500  text-white font-bold py-2 px-4 rounded "
                 onClick={toggleEditMode}
             >
-                {editMode ? 'Exit Edit Mode' : 'Edit Resume'}
+                {editMode ? 'Exit Edit ' : 'Edit '}
                 </button>
             </div>
 
-            <div className="container px-24 py-5 mb-20 " ref={resumeContainerRef}>
+            <div className="container md:px-24 py-5 mb-20 " ref={resumeContainerRef}>
                 <ResumeProfile />
                 <ResumeEducation isEditMode={editMode} />
                 <ResumeJobs isEditMode={editMode} />

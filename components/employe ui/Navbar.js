@@ -29,8 +29,8 @@ const Navbar = () => {
   };  
 
   return (
-    <header className="bg-white shadow-md text-[#676566] font-semibold ">
-      <div className="container mx-auto flex items-center justify-between py-4 px-8">
+    <header className="bg-white shadow-md text-[#676566] font-semibold">
+     <div className="container mx-auto flex flex-wrap items-center justify-between py-4 px-8">
         <Link href={isAuthenticated ? "/employe/auth" : "/employe"} className="logo cursor-pointer">
           <img
             className="w-32"
@@ -85,18 +85,15 @@ const Navbar = () => {
 
             (<>
 
-              <Link href="/employe/signin"
-                className="button font-normal px-4 py-1 rounded-md bg-white text-blue-500 border border-blue-500"
-              >
+<>
+              <Link href="/employe/signin" className="button font-normal px-4 py-1 rounded-md bg-white text-blue-500 border border-blue-500">
                 Login
               </Link>
-              <Link href="/employe/signup"
-                className="button font-normal px-4 py-1 rounded-md bg-blue-500 hover:bg-blue-700 text-white"
-                id="register"
-              >
+                <Link href="/employe/signup" className="button font-normal px-4 py-1 rounded-md bg-blue-500 hover:bg-blue-700 text-white" id="register">
                 Register
               </Link>
-            <Link className='pl-3 border-l-2' href="/student">Continue as student</Link>
+                <Link className='pl-4 border-l-2' href="/student">I'm Student</Link>
+            </>
 
             </>)
 

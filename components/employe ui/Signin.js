@@ -46,9 +46,9 @@ const Signin = () => {
     };
 
     return (
-        <div className="absolute top-0 left-0 h-screen w-screen bg-gray-800 bg-opacity-25 flex items-center justify-center">
-            <div className="relative px-10 group overflow-hidden h-[65vh] w-[40vw] bg-white p-5 rounded-md shadow-lg">
-                <h3 className="text-center text-xl text-blue-500 font-normal px-4 py-2 relative">
+        <div className="absolute px-5 top-0 left-0 h-screen w-screen bg-gray-800 bg-opacity-25 flex items-center justify-center">
+            <div className="relative px-10 py-10 group overflow-hidden sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl w-full bg-white p-5 rounded-lg shadow-lg">
+            <h3 className="text-center text-xl text-blue-500 font-normal px-4 py-2 relative">
                     Login
                     <button
                         className="absolute top-2 right-2 text-gray-600 hover:text-gray-800"

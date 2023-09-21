@@ -20,17 +20,17 @@ const Page = () => {
 
   return (
     <>
-      <div className="container mx-auto text-center py-10">
+      <div className="container mx-auto text-center py-5">
         <div className="flex flex-col gap-3 items-center py-5">
-          <h1 className="text-4xl font-semibold text-gray-800">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-gray-800">
             Welcome, {employe?.firstname} {employe?.lastname}
           </h1>
           <p className="font-medium">What's on your mind today!</p>
         </div>
-        <div className="flex justify-center">
+        <div className="flex flex-col md:flex-row justify-center md:justify-start">
           <Link
             href="/employe/auth/create/job"
-            className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg mx-4 hover:bg-blue-700"
+            className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg mx-4 my-2 md:my-0 hover:bg-blue-700"
           >
             Create Job
           </Link>
@@ -42,13 +42,13 @@ const Page = () => {
           </Link>
         </div>
 
-        <div className="mt-4 pl-10 ">
-          <p className="text-left p-5 font-medium text-2xl">Recently Created</p>
-          <div className="flex justify-start mt-2">
+        <div className="mt-4 pl-10">
+          <p className="text-left p-5 font-medium text-xl md:text-2xl">Recently Created</p>
+          <div className="flex flex-row items-center justify-center mt-2">
             <button
               className={`${
                 showInternships ? "bg-blue-500" : "bg-gray-300"
-              } text-white font-semibold py-2 px-4 rounded-lg mx-4 hover:bg-blue-700`}
+              } text-white font-semibold py-2 px-4 rounded-lg mx-4 my-2 md:my-0 hover:bg-blue-700`}
               onClick={() => setShowInternships(true)}
             >
               Internships
@@ -56,7 +56,7 @@ const Page = () => {
             <button
               className={`${
                 !showInternships ? "bg-green-500" : "bg-gray-300"
-              } text-white font-semibold py-2 px-4 rounded-lg mx-4 hover:bg-green-700`}
+              } text-white font-semibold py-2 px-4 rounded-lg mx-4 my-2 md:my-0 hover:bg-green-700`}
               onClick={() => setShowInternships(false)}
             >
               Jobs
@@ -64,11 +64,11 @@ const Page = () => {
           </div>
         </div>
 
-        <div className="mt-4">
+        <div className="mt-4 p-5">
           {displayedItems?.length === 0 ? (
             <p className="text-red-500 font-semibold">No {showInternships ? "internships" : "jobs"} found.</p>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {displayedItems?.map((item) =>
                 showInternships ? (
                   <InternshipCard

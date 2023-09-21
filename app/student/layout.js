@@ -1,6 +1,7 @@
 "use client"
 
-import Footer from "@/components/student ui/Footer"
+// import Footer from "@/components/common/Footer"
+import Footer from "@/components/common/Footer"
 import Navbar from "@/components/student ui/Navbar"
 import { asyncCurrentStudent } from "@/store/Actions/studentAction"
 import { removeerror } from "@/store/Reducers/studentReducer"

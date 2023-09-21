@@ -34,30 +34,36 @@ const Signup = () => {
     };
 
     dispatch(asyncSignupemploye(newEmploye));
-    if(isAuthenticated){
-      router.push('/employe/auth')
+    if (isAuthenticated) {
+      router.push("/employe/auth");
     }
   };
 
   return (
-    <div className="flex p-10 gap-5">
-      <div 
-        className=" bg-cover  p-5"
+    <div className="flex flex-col md:flex-row mt-3 md:p-5 gap-5">
+      <div
+        className="h-[50vh] md:h-screen md:w-1/2 bg-cover p-5"
         style={{
           backgroundImage:
-            'url("https://internshala.com/static/images/registration/employer/registration_new/images/banner/r1920_banner.png")', backgroundPosition:'30% 10%'
+            'url("https://internshala.com/static/images/registration/employer/registration_new/images/banner/r1920_banner.png")',
+          backgroundPosition: '30% 10%'
         }}
       >
-        <h1 className="text-4xl text-gray-800 font-bold mb-1 flex items-center">
-        
-        Hire interns & freshers <span><img src="https://internshala.com/static/images/registration/employer/registration_new/images/banner/faster.svg" alt="" /></span>
+        <h1 className="text-3xl text-gray-800 font-bold mb-1 flex flex-col md:flex-row items-center">
+          Hire interns & freshers{" "}
+          <span>
+            <img
+              className=""
+              src="https://internshala.com/static/images/registration/employer/registration_new/images/banner/faster.svg"
+              alt=""
+            />
+          </span>
         </h1>
-        <p className="text-gray-800 font-semibold text-lg">
-        Post jobs for free now
+        <p className="text-gray-800 text-center md:text-start font-semibold text-lg">
+          Post jobs for free now
         </p>
-       
       </div>
-      <div className="w-30 bg-white shadow-md ml-5 p-5 mt-2">
+      <div className="md:w-1/2 shadow-md p-5 mt-2">
         <form>
           <p>Email</p>
           <input
@@ -74,43 +80,38 @@ const Signup = () => {
             placeholder="Must be at least 6 characters"
             value={password}
             required
-
             onChange={(e) => setPassword(e.target.value)}
             className="w-full h-10 border border-gray-300 rounded px-2 focus:outline-none focus:border-blue-500"
           />
-          <div className="flex mt-3">
-            <div className="w-1/2 pr-2">
+          <div className="flex flex-col md:flex-row mt-3">
+            <div className="md:w-1/2 md:pr-2">
               <p>First Name</p>
               <input
                 type="text"
                 placeholder="John"
                 value={firstName}
-            required
-
+                required
                 onChange={(e) => setFirstName(e.target.value)}
                 className="w-full h-10 border border-gray-300 rounded px-2 focus:outline-none focus:border-blue-500"
               />
             </div>
-            <div className="w-1/2 pl-2">
+            <div className="md:w-1/2 md:pl-2 mt-3 md:mt-0">
               <p>Last Name</p>
               <input
                 type="text"
                 placeholder="Doe"
                 value={lastName}
-            required
-
+                required
                 onChange={(e) => setLastName(e.target.value)}
                 className="w-full h-10 border border-gray-300 rounded px-2 focus:outline-none focus:border-blue-500"
               />
             </div>
           </div>
-         
           <p className="text-gray-700 mt-3">Contact</p>
           <input
             type="text"
             placeholder="1234567890"
             required
-
             value={contact}
             onChange={(e) => setContact(e.target.value)}
             className="w-full h-10 border border-gray-300 rounded px-2 focus:outline-none focus:border-blue-500"
@@ -120,12 +121,11 @@ const Signup = () => {
             type="text"
             placeholder="City"
             required
-
             value={city}
             onChange={(e) => setCity(e.target.value)}
             className="w-full h-10 border border-gray-300 rounded px-2 focus:outline-none focus:border-blue-500"
           />
-            <p className="text-gray-700 mt-3">Organization Name </p>
+          <p className="text-gray-700 mt-3">Organization Name</p>
           <input
             type="text"
             placeholder="organization name"
@@ -140,7 +140,7 @@ const Signup = () => {
               Terms and Conditions
             </Link>
           </p>
-         
+
           <button
             onClick={signupHandler}
             className="bg-blue-500 text-white font-normal px-4 py-2 rounded-md mt-3 hover:bg-blue-700"

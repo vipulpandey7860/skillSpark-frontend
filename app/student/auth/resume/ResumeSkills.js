@@ -57,7 +57,7 @@ const ResumeSkills = ({ isEditMode }) => {
 
   return (
     <div className="container">
-      <section className="section_left border mx-5 flex flex-row items-start px-4">
+      <section className="section_left border gap-12 md:gap-1 mx-5 flex flex-row items-start px-4">
         <h5 className="text-lg w-1/5  mt-4">
           Skills{' '}
           {isEditMode && (

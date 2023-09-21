@@ -94,9 +94,9 @@ const EmployerProfilePage = () => {
       <div
         className="bg-cover bg-center h-64 bg-gradient-to-r from-pink-300 via-purple-400 to-indigo-500"
       >
-        <div className="container mx-auto">
+         <div className="container mx-auto">
           <div className="w-full lg:w-7/12 pt-5 text-center">
-            <h1 className="text-4xl text-white font-bold">
+            <h1 className="text-4xl text-white font-bold ">
               Hello, {employe?.firstname} {employe?.lastname}
             </h1>
             <p className="mt-3 mb-6 text-lg text-white">
@@ -105,8 +105,8 @@ const EmployerProfilePage = () => {
           </div>
         </div>
       </div>
-      <div className="flex">
-        <div className="container border w-1/4 h-max mx-auto mt-5 p-5 rounded-lg shadow-md">
+      <div className="flex flex-col-reverse md:flex-row p-5 md:p-0">
+        <div className="container border w-full  md:w-1/4 h-max mx-auto mt-5 p-5 rounded-lg shadow-md">
           <div className="w-full mx-auto">
             <div className="card card-profile ">
               <div className="flex justify-center">
@@ -167,7 +167,7 @@ const EmployerProfilePage = () => {
             </div>
           </div>
         </div>
-        <div className="border rounded-lg mt-5 w-1/2 order-first xl:col-span-8 mx-10">
+        <div className="border rounded-lg mt-5 w-full md:w-1/2 order-first xl:col-span-8 md:mx-10">
           <div className="bg-secondary shadow card">
             <div className="bg-white border-0 card-header">
               <div className="flex items-center justify-between p-5 ">
@@ -177,8 +177,8 @@ const EmployerProfilePage = () => {
             <div className="card-body px-5 text-[#314362]">
               {isChangingPassword ? (
                 <form onSubmit={resetPasswordHandler}>
-                  <h6 className="text-gray-600 text-sm">Change Password</h6>
-                  <div className="grid grid-cols-2 gap-4 px-4 py-10 border-b">
+                     <h6 className="text-gray-600 text-sm ">Change Password</h6>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:px-4 md:py-10 py-5 border-b">
                     <div className="form-group flex flex-col gap-2">
                       <label htmlFor="input-old-password" className="form-control-label">
                         Old Password
@@ -238,7 +238,7 @@ const EmployerProfilePage = () => {
               ) : (
                 <form onSubmit={handleSubmit}>
                   <h6 className="text-gray-600 text-sm">User Information</h6>
-                  <div className="grid grid-cols-2 gap-4 px-4 py-10 border-b">
+                    <div className="grid grid-cols-1 md:grid-cols-2  md:px-4 gap-4 md:py-10 py-5 border-b">
                     <div className="form-group flex flex-col gap-2">
                       <label htmlFor="input-firstname" className="form-control-label">
                         First name

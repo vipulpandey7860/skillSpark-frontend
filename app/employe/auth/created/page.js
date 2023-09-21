@@ -40,7 +40,7 @@ const Page = () => {
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 p-5 gap-4">
         {showInternships
           ? internshipList.length === 0 ? (
               <p className="text-red-500 font-semibold text-end p-10 relative left-80">No internships found.</p>

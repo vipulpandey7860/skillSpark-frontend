@@ -6,7 +6,7 @@ const ResumeProfile = () => {
 
   return (
     <div className="container ">
-      <section className="section_left border mx-5 p-4">
+      <section className="section_left gap-12 md:gap-1 border mx-5 p-4">
         <div className="">
           <h3 className="text-4xl font-medium py-2 capitalize mt-4">
             {student && student.firstname} {student && student.lastname}

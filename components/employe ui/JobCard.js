@@ -11,10 +11,10 @@ const JobCard = ({ job,employe }) => {
     } 
   }
   return (
-        <div className="container w-[30vw]  m-5 ">
-      <div className="px-10 py-5 border rounded-lg shadow-lg">
-        <div className='flex items-center justify-between'>
-          <div className='flex flex-col items-start gap-3'>
+    <div className="container mx-auto md:w-[100%] sm:w-[45%] m-5">
+    <div className="px-6 py-4 border rounded-lg shadow-lg">
+      <div className='flex md:flex-row items-center justify-between'>
+        <div className='flex flex-col items-start gap-3'>
             <h4 className="text-lg text-[#484848] font-semibold">{job.title}</h4>
             <p className='text-[#8B8B8B]'>{employe.organizationname}</p>
           </div>

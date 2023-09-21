@@ -17,6 +17,7 @@ const Signup = () => {
   const [contact, setContact] = useState("");
   const [city, setCity] = useState("");
   const [address, setAddress] = useState("");
+
   useEffect(() => {
     if (isAuthenticated) router.push("/student/auth");
   }, [isAuthenticated]);
@@ -35,15 +36,16 @@ const Signup = () => {
     };
 
     dispatch(asyncSignupStudent(newStudent));
-    if(isAuthenticated){
-      router.push('/student/auth')
+    
+    if (isAuthenticated) {
+      router.push('/student/auth');
     }
   };
 
   return (
-    <div className="flex p-10 gap-5">
+    <div className="flex flex-col md:flex-row md:p-10 lg:p-10 gap-5">
       <div
-        className="w-70 bg-cover bg-center  p-5"
+        className="w-full md:w-1/2 bg-cover bg-center p-5"
         style={{
           backgroundImage:
             'url("https://internshala.com/static/images/registration/student/background-768.png")',
@@ -83,7 +85,7 @@ const Signup = () => {
           </div>
         </div>
       </div>
-      <div className="w-30 bg-white shadow-md ml-5 p-5 mt-2">
+      <div className="w-full md:w-1/2 bg-white shadow-md md:ml-5 lg:ml-5 p-5 mt-2">
         <form>
           <p>Email</p>
           <input
@@ -100,7 +102,6 @@ const Signup = () => {
             placeholder="Must be at least 6 characters"
             value={password}
             required
-
             onChange={(e) => setPassword(e.target.value)}
             className="w-full h-10 border border-gray-300 rounded px-2 focus:outline-none focus:border-blue-500"
           />
@@ -111,8 +112,7 @@ const Signup = () => {
                 type="text"
                 placeholder="John"
                 value={firstName}
-            required
-
+                required
                 onChange={(e) => setFirstName(e.target.value)}
                 className="w-full h-10 border border-gray-300 rounded px-2 focus:outline-none focus:border-blue-500"
               />
@@ -123,8 +123,7 @@ const Signup = () => {
                 type="text"
                 placeholder="Doe"
                 value={lastName}
-            required
-
+                required
                 onChange={(e) => setLastName(e.target.value)}
                 className="w-full h-10 border border-gray-300 rounded px-2 focus:outline-none focus:border-blue-500"
               />
@@ -145,7 +144,6 @@ const Signup = () => {
             type="text"
             placeholder="1234567890"
             required
-
             value={contact}
             onChange={(e) => setContact(e.target.value)}
             className="w-full h-10 border border-gray-300 rounded px-2 focus:outline-none focus:border-blue-500"
@@ -155,7 +153,6 @@ const Signup = () => {
             type="text"
             placeholder="City"
             required
-
             value={city}
             onChange={(e) => setCity(e.target.value)}
             className="w-full h-10 border border-gray-300 rounded px-2 focus:outline-none focus:border-blue-500"
@@ -165,7 +162,6 @@ const Signup = () => {
             type="text"
             placeholder="Address"
             required
-
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             className="w-full h-10 border border-gray-300 rounded px-2 focus:outline-none focus:border-blue-500"
@@ -176,7 +172,7 @@ const Signup = () => {
               Terms and Conditions
             </Link>
           </p>
-         
+
           <button
             onClick={signupHandler}
             className="bg-blue-500 text-white font-normal px-4 py-2 rounded-md mt-3 hover:bg-blue-700"
