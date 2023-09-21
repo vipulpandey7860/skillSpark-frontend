@@ -33,7 +33,7 @@ const StudentLayout = ({ children }) => {
 
   if (errors) {
     errors.map((error) => {
-      if (error.includes("Login first to access this resource")) {
+      if (error?.includes("Login first to access this resource")) {
         dispatch(removeerror())
         return;
       }
