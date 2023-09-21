@@ -5,9 +5,6 @@ import { useSelector } from "react-redux";
 import InternshipCard from "@/components/employe ui/InternshipCard";
 import JobCard from "@/components/employe ui/JobCard";
 
-export const metadata = {
-  title: 'employe | Home',
-};
 
 const Page = () => {
   const [showInternships, setShowInternships] = useState(true);
