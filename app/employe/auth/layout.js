@@ -7,9 +7,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 
 
-export const metadata = {
-  title: 'Employe | Home',
-};
+// export const metadata = {
+//   title: 'Employe | Home',
+// };
 
 const employeAuth = ({ children }) => {
     const dispatch = useDispatch();
