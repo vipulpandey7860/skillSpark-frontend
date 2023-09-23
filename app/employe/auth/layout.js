@@ -4,6 +4,13 @@
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
+
+
+export const metadata = {
+  title: 'Employe | Home',
+};
+
 const employeAuth = ({ children }) => {
     const dispatch = useDispatch();
     const router = useRouter();

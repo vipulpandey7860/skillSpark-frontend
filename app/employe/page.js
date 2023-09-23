@@ -4,9 +4,7 @@ import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
-// export const metadata = {
-//     title: 'Internshala | employe',
-// }
+
 const page = () => {
 
   const router = useRouter();

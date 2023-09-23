@@ -5,9 +5,6 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
 
-// export const metadata = {
-//   title: 'Student | Signup',
-// }
 
 const page = () => {
   const dispatch = useDispatch();

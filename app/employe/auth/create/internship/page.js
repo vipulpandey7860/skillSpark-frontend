@@ -16,21 +16,21 @@ const InternshipCreation = () => {
 
     const [internshipData, setInternshipData] = useState({
         profile: '',
-        skills: '', // Changed to textarea
+        skills: '', 
         internshiptype: 'Remote',
         openings: '',
         from: null,
         to: null,
         responsibilities: '',
         stipend: {
-            amount: 0, // Changed to accept numeric input
+            amount: 0, 
             mode: 'Paid',
         },
-        perks: '', // Changed to textarea
+        perks: '', 
         description: '',
         status: 'Open',
         assesments: '',
-        duration: '', // Added duration field
+        duration: '', 
     });
 
     const handleInputChange = (e) => {
@@ -102,7 +102,7 @@ const InternshipCreation = () => {
                 </div>
                 <div className="card-body px-5 text-[#314362]">
                     <form>
-                        <div className="grid grid-cols-1 md:rid-cols-2 gap-4 px-4 py-10 border-b">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 px-4 py-10 border-b">
                             <div className="form-group flex flex-col gap-2">
                                 <label htmlFor="profile" className="form-control-label">Profile</label>
                                 <input
@@ -170,7 +170,7 @@ const InternshipCreation = () => {
                             <div className="form-group flex flex-col gap-2">
                                 <label htmlFor="openings" className="form-control-label">Openings</label>
                                 <input
-                                    type="text"
+                                    type="number"
                                     id="openings"
                                     required
                                     className="form-input p-2 border rounded-md shadow-md"
@@ -181,7 +181,7 @@ const InternshipCreation = () => {
                                 />
                             </div>
                         </div>
-                        <div className="grid grid-cols-1 md:rid-cols-2 gap-4 px-4 py-10 border-b">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 px-4 py-10 border-b">
 
                             <div className="form-group flex flex-col gap-2">
                                 <label htmlFor="stipend.amount" className="form-control-label">Stipend Amount</label>

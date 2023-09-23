@@ -27,7 +27,7 @@ const Page = () => {
           </h1>
           <p className="font-medium">What's on your mind today!</p>
         </div>
-        <div className="flex flex-col md:flex-row justify-center md:justify-start">
+        <div className="flex flex-col md:flex-row justify-center ">
           <Link
             href="/employe/auth/create/job"
             className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg mx-4 my-2 md:my-0 hover:bg-blue-700"
@@ -44,7 +44,7 @@ const Page = () => {
 
         <div className="mt-4 pl-10">
           <p className="text-left p-5 font-medium text-xl md:text-2xl">Recently Created</p>
-          <div className="flex flex-row items-center justify-center mt-2">
+          <div className="flex flex-row items-center justify-center md:justify-start mt-2">
             <button
               className={`${
                 showInternships ? "bg-blue-500" : "bg-gray-300"

@@ -47,7 +47,7 @@ const CreateJobComponent = () => {
                 </div>
                 <div className="card-body px-5 text-[#314362]">
                     <form>
-                        <div className="grid grid-cols-1 md:grid-cols-1    gap-4 px-4 py-10 border-b">
+                        <div className="grid grid-cols-1 md:grid-cols-2    gap-4 px-4 py-10 border-b">
                             <div className="form-group flex flex-col gap-2">
                                 <label htmlFor="title" className="form-control-label">Job Title</label>
                                 <input
@@ -63,7 +63,7 @@ const CreateJobComponent = () => {
                             <div className="form-group flex flex-col gap-2">
                                 <label htmlFor="openings" className="form-control-label">Openings</label>
                                 <input
-                                    type="text"
+                                    type="number"
                                     id="openings"
                                     className="form-input p-2 border rounded-md shadow-md"
                                     placeholder="Openings"

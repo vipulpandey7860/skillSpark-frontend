@@ -89,7 +89,7 @@ const Signup = () => {
         <form>
           <p>Email</p>
           <input
-            type="text"
+            type="email"
             placeholder="john@example.com"
             value={email}
             required
@@ -141,8 +141,10 @@ const Signup = () => {
           </select>
           <p className="text-gray-700 mt-3">Contact</p>
           <input
-            type="text"
+            type="number"
             placeholder="1234567890"
+            max={9999999999}
+            min={1000000000}
             required
             value={contact}
             onChange={(e) => setContact(e.target.value)}

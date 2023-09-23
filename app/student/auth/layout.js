@@ -5,6 +5,10 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 
+export const metadata = {
+  title: 'Student | Home',
+}
+
 const StudentAuth = ({ children }) => {
     const dispatch = useDispatch();
     const router = useRouter();
