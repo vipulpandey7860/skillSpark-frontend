@@ -12,9 +12,9 @@ import { toast } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
 
 
-export const metadata = {
-  title: 'Internshala | Employe',
-}
+// export const metadata = {
+//   title: 'Internshala | Employe',
+// }
 
 const employeLayout = ({ children }) => {
   const dispatch = useDispatch();
