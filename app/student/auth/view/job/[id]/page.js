@@ -1,10 +1,10 @@
 "use client"
-import React, {  useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { FaMapMarkerAlt, FaCalendar, FaClock, FaMoneyBillAlt, FaUserAlt, FaUsers } from 'react-icons/fa';
 import { SiStatuspage } from 'react-icons/si';
 import { useParams } from 'next/navigation';
-import {  asyncApplyJob } from "@/store/Actions/studentAction";
+import { asyncApplyJob } from "@/store/Actions/studentAction";
 
 
 const page = () => {
@@ -20,18 +20,18 @@ const page = () => {
         setjob(job);
     }, [jobs, id])
 
-       const ApplyJobHandler = (id) => {
+    const ApplyJobHandler = (id) => {
         dispatch(asyncApplyJob(id));
     };
 
     function joningSetter(status) {
         if (status === 'Open') {
-          return 'Immediate'
+            return 'Immediate'
         } else if (status === 'closed') {
-          return 'Closed'
-        } 
-      }
-    
+            return 'Closed'
+        }
+    }
+
     return (
         <>
             <h2 className='font-bold capitalize text-3xl text-center pt-10'>{job?.title} at {job?.employe?.organizationname}</h2>
